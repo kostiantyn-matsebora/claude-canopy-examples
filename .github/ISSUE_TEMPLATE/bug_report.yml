@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a broken example, setup problem, or mismatch between docs and repo behavior.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - example skill
+        - README / setup docs
+        - submodule wiring
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: canopy_version
+    attributes:
+      label: Canopy version or commit
+      placeholder: e.g. submodule commit SHA
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context

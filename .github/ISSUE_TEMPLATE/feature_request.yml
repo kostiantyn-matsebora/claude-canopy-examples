@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest a new example skill, repo improvement, or onboarding improvement.
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example skill or workflow
+      description: Show what the example would demonstrate.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes

@@ -16,6 +16,7 @@ cd claude-canopy-examples
 ```
 
 > If you cloned without `--recurse-submodules`, run:
+>
 > ```bash
 > git submodule update --init
 > .\.claude\canopy\setup.ps1
@@ -26,12 +27,13 @@ cd claude-canopy-examples
 Open the repository in VS Code and invoke any of the example skills via GitHub Copilot Chat:
 
 | Skill | Invocation example |
-|---|---|
+| --- | --- |
 | `generate-readme` | `Generate or update the README for this project` |
 | `add-changelog-entry` | `Add changelog entry for version 1.0.0` |
 | `review-file` | `Review src/auth.py` |
 
 Each skill lives under `.claude/skills/<skill-name>/` and contains:
+
 - `skill.md` — the skill definition (frontmatter + Tree + Rules)
 - `ops.md` — skill-local op definitions
 - `schemas/`, `templates/`, `policies/`, `commands/`, `verify/` — supporting resources
@@ -45,6 +47,8 @@ See the [Canopy framework documentation](https://github.com/kostiantyn-matsebora
 3. Add your skill under `.claude/skills/<skill-name>/`
 4. Commit following [Conventional Commits](https://www.conventionalcommits.org/)
 5. Open a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for repo-specific contribution guidelines.
 
 ## License
 
