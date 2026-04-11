@@ -1,0 +1,33 @@
+{
+  "target": "$ARGUMENTS",
+  "file_count": 3,
+  "findings": [
+    {
+      "file": "src/auth.py",
+      "line_start": 42,
+      "line_end": 44,
+      "severity": "critical",
+      "category": "security",
+      "description": "User input passed directly to SQL query without parameterization.",
+      "suggested_fix": "cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))"
+    },
+    {
+      "file": "src/utils.ts",
+      "line_start": 18,
+      "line_end": 18,
+      "severity": "warning",
+      "category": "correctness",
+      "description": "Variable `result` is declared but never used.",
+      "suggested_fix": "Remove the declaration or use the value."
+    },
+    {
+      "file": "src/config.py",
+      "line_start": 5,
+      "line_end": 5,
+      "severity": "info",
+      "category": "style",
+      "description": "Import order does not follow PEP 8 (stdlib before third-party).",
+      "suggested_fix": "Move `import os` above `import requests`."
+    }
+  ]
+}

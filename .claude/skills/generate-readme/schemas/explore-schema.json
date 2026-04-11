@@ -1,0 +1,11 @@
+{
+  "target_file": "README.md",
+  "detected_language": "python|typescript|rust|go|unknown",
+  "detected_deps": ["dep-a", "dep-b"],
+  "entry_points": ["src/main.py", "index.ts"],
+  "existing_readme": {
+    "present": true,
+    "sections": ["## Installation", "## Custom Notes"],
+    "custom_sections": ["## Custom Notes"]
+  }
+}
