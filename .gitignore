@@ -1,3 +1,4 @@
-# Canopy bundled-skill junctions/symlinks created by setup.ps1 / setup.sh
+# Canopy bundled agent junctions/symlinks created by setup.ps1 / setup.sh
 # These are local convenience links into the submodule and must not be committed.
-.claude/skills/canopy-skill
+.claude/agents/canopy.md
+.claude/agents/canopy
