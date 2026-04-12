@@ -26,17 +26,53 @@ cd claude-canopy-examples
 
 Open the repository in VS Code and invoke any of the example skills via GitHub Copilot Chat:
 
-| Skill | Invocation example |
-| --- | --- |
-| `generate-readme` | `Generate or update the README for this project` |
-| `add-changelog-entry` | `Add changelog entry for version 1.0.0` |
-| `review-file` | `Review src/auth.py` |
+| Skill | Invocation example | Tree syntax |
+| --- | --- | --- |
+| `generate-readme` | `Generate or update the README for this project` | box-drawing |
+| `add-changelog-entry` | `Add changelog entry for version 1.0.0` | box-drawing |
+| `review-file` | `Review src/auth.py` | box-drawing |
+| `scaffold-skill` | `Scaffold a new skill called my-skill` | markdown list (`*`) |
+| `bump-version` | `Bump version to 2.1.0` | markdown list (`*`) |
 
 Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
 - `skill.md` — the skill definition (frontmatter + Tree + Rules)
 - `ops.md` — skill-local op definitions
 - `schemas/`, `templates/`, `policies/`, `commands/`, `verify/` — supporting resources
+
+### Tree syntax
+
+Canopy supports two equivalent ways to write a skill tree. Both are shown in these examples:
+
+**Markdown list syntax** — `*` nested lists written directly under `## Tree` (no fenced code block):
+
+```markdown
+## Tree
+
+* skill-name
+  * SHOW_PLAN >> field1 | field2
+  * ASK << Proceed? | Yes | No
+  * IF << condition
+    * branch action
+  * ELSE
+    * other action
+```
+
+**Box-drawing syntax** — fenced code block with tree characters:
+
+```markdown
+## Tree
+
+\`\`\`
+skill-name
+├── SHOW_PLAN >> field1 | field2
+├── ASK << Proceed? | Yes | No
+├── IF << condition
+│   └── branch action
+└── ELSE
+    └── other action
+\`\`\`
+```
 
 See the [Canopy framework documentation](https://github.com/kostiantyn-matsebora/claude-canopy) for the full skill anatomy reference.
 

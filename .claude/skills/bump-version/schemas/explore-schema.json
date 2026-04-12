@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["current_version", "files_to_update", "changelog_exists"],
+  "properties": {
+    "current_version": {
+      "type": "string",
+      "description": "The current version string found in the primary version file"
+    },
+    "primary_version_file": {
+      "type": "string",
+      "description": "The file treated as the authoritative version source"
+    },
+    "files_to_update": {
+      "type": "array",
+      "description": "All files that contain a version string to be updated",
+      "items": {
+        "type": "object",
+        "required": ["path", "type"],
+        "properties": {
+          "path": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["package.json", "pyproject.toml", "Cargo.toml", "go.mod", "version.txt", "csproj", "other"]
+          },
+          "current_version": { "type": "string" }
+        }
+      }
+    },
+    "changelog_exists": {
+      "type": "boolean",
+      "description": "Whether CHANGELOG.md exists at the project root"
+    }
+  }
+}
