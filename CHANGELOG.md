@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add README.md with project overview, prerequisites, installation, usage, and contributing sections
 - Fix skill discovery for bundled canopy skills by creating directory junctions/symlinks in `.claude/skills/`
 
-## [Unreleased]
+## [0.3.0] - 2026-04-12
 
 ### Added
 
@@ -24,4 +24,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `bump-version` example — bumps semver across version-bearing files and prepends a CHANGELOG entry; demonstrates markdown list syntax with nested `IF`/`ELSE` branches, explore subagent, and `VERIFY_EXPECTED`
 - README: usage table updated with new skills; Tree syntax section added showing both markdown list and box-drawing formats side-by-side
 
+## [0.2.0] - 2026-04-12
+
+### Added
+
+- `canopy-skill` agent available via submodule update — handles CREATE, MODIFY, SCAFFOLD, CONVERT_TO_CANOPY, VALIDATE, and CONVERT_TO_REGULAR operations
+- `.claude/agents/canopy-skill.md` and `.claude/agents/canopy-skill/` wired by setup script
+
+### Changed
+
+- Submodule `.claude/canopy` updated to `d6bd2d7` (canopy v0.5.0)
+- README: Prerequisites broadened from VS Code + GitHub Copilot Chat to any Claude Code-compatible assistant (Claude Code CLI, VS Code extensions, etc.); usage section phrasing made tool-agnostic
+
+[0.3.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/releases/tag/v0.1.0

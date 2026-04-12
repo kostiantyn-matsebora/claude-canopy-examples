@@ -5,7 +5,10 @@
 ## Prerequisites
 
 - [Git](https://git-scm.com/) 2.20+ (for submodule support)
-- [Visual Studio Code](https://code.visualstudio.com/) with the [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extension
+- Any Claude Code-compatible AI coding assistant — for example:
+  - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (`claude` in your terminal)
+  - [VS Code](https://code.visualstudio.com/) with [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) or the [Claude extension](https://marketplace.visualstudio.com/items?itemName=Anthropic.claude-code)
+  - Any editor or CLI that supports the `.claude/` skill and agent conventions
 
 ## Installation
 
@@ -24,7 +27,7 @@ cd claude-canopy-examples
 
 ## Usage
 
-Open the repository in VS Code and invoke any of the example skills via GitHub Copilot Chat:
+Open the repository in your AI coding assistant and invoke any of the example skills:
 
 | Skill | Invocation example | Tree syntax |
 | --- | --- | --- |
