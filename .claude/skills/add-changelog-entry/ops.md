@@ -2,7 +2,7 @@
 
 ---
 
-## COLLECT_COMMITS \>\> commits
+## COLLECT_COMMITS >> commits
 
 ```
 COLLECT_COMMITS >> commits
@@ -14,26 +14,25 @@ COLLECT_COMMITS >> commits
 
 ---
 
-## CLASSIFY_COMMITS \<\< commits \>\> {added, changed, fixed, removed}
+## CLASSIFY_COMMITS << commits >> {added, changed, fixed, removed}
 
 Group each commit message by conventional-commit prefix:
 
-- `feat:` or `feat(<scope>):` → Added
-- `fix:` or `fix(<scope>):` → Fixed
-- `refactor:` / `perf:` / `chore:` → Changed
-- `revert:` / `remove:` / `delete:` → Removed
-- unrecognized prefix or plain message → Changed
+- `feat:` or `feat(<scope>):` maps to Added
+- `fix:` or `fix(<scope>):` maps to Fixed
+- `refactor:` / `perf:` / `chore:` maps to Changed
+- `revert:` / `remove:` / `delete:` maps to Removed
+- unrecognized prefix or plain message maps to Changed
 
 Strip the prefix and scope before recording the message text.
 
 ---
 
-## PREPEND_ENTRY \<\< version
+## PREPEND_ENTRY << version
 
 ```
 PREPEND_ENTRY << version
 ├── Read `templates/entry.md`
 ├── substitute <version>, <date>, <added>, <changed>, <fixed>, <removed>
-│   — omit any section whose list is empty
-└── insert rendered entry immediately after the CHANGELOG.md header block (line 7)
+└── insert rendered entry immediately after the CHANGELOG.md header block
 ```

@@ -10,7 +10,7 @@ Generate or update README at: $ARGUMENTS (default: README.md)
 
 ## Agent
 
-**explore** — reads the project root for: any existing README.md, package manifests (package.json, pyproject.toml, Cargo.toml, go.mod), top-level source directories, and .gitignore. Returns language, dependencies, entry points, and any existing README sections.
+**explore** — reads the project root for: any existing README.md, package manifests (package.json, pyproject.toml, Cargo.toml, go.mod), top-level source directories, and .gitignore.
 
 ---
 
@@ -21,6 +21,9 @@ generate-readme
 ├── EXPLORE >> context
 ├── SHOW_PLAN >> target_file | sections | detected_language | detected_deps
 ├── ASK << Proceed with generation? | Yes | No
+├── IF << user chose No
+│   └── END Cancelled.
+├── Read `policies/readme-rules.md` for content and preservation rules.
 ├── IF << README already exists at target_file
 │   └── MERGE_README << context
 ├── ELSE
@@ -32,7 +35,6 @@ generate-readme
 
 ## Rules
 
-- Read `policies/readme-rules.md` before writing any content
 - Never overwrite custom sections the user has written — preserve them
 - Keep code examples minimal but runnable
 

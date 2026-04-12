@@ -16,19 +16,19 @@ add-changelog-entry
 ├── IF << CHANGELOG.md does not exist
 │   └── create CHANGELOG.md from `templates/changelog.md`
 ├── COLLECT_COMMITS >> commits
+├── Read `constants/levels.md` for valid change categories
 ├── CLASSIFY_COMMITS << commits >> {added, changed, fixed, removed}
 ├── SHOW_PLAN >> version | date | added | changed | fixed | removed
 ├── ASK << Proceed? | Yes | No
+├── Read `policies/changelog-rules.md` for entry formatting rules
 ├── PREPEND_ENTRY << version
-└── VERIFY_EXPECTED << verify/verify-expected.md
+└── VERIFY_EXPECTED
 ```
 
 ---
 
 ## Rules
 
-- Read `constants/levels.md` — use only the change categories defined there
-- Read `policies/changelog-rules.md` before formatting any entry
 - Version must follow semver — validate strictly before proceeding
 
 ## Response: version | entry_line_count | commit_count_processed

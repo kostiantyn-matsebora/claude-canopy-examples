@@ -11,13 +11,16 @@ New skill name: $ARGUMENTS
 ## Tree
 
 * scaffold-skill
-  * validate $ARGUMENTS is a valid kebab-case identifier; END if not
-  * IF << .claude/skills/$ARGUMENTS already exists
+  * validate $ARGUMENTS is a valid kebab-case identifier
+  * IF << $ARGUMENTS is not valid kebab-case
+    * END Skill name must be kebab-case (e.g. my-skill)
+  * IF << .claude/skills/$ARGUMENTS/ exists
     * END Skill already exists — choose a different name or delete the existing one first
   * SHOW_PLAN >> skill name | files to create | directories to create
   * ASK << Proceed? | Yes | No
   * CREATE_SKILL_FILES << $ARGUMENTS
-  * confirm files created and print next steps
+  * confirm files created
+  * print next steps to user
 
 ## Rules
 

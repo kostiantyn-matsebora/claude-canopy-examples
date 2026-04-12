@@ -10,7 +10,7 @@ Review: $ARGUMENTS
 
 ## Agent
 
-**explore** — read all files under `$ARGUMENTS`. Also read any linting or type-check config at the project root (eslint, tsconfig, pyproject.toml, .editorconfig, etc.) to understand the project's own standards. Return findings per `schemas/explore-schema.json`.
+**explore** — read all files under `$ARGUMENTS`. Also read any linting or type-check config at the project root (eslint, tsconfig, pyproject.toml, .editorconfig, etc.) to understand the project's own standards.
 
 ---
 
@@ -18,6 +18,7 @@ Review: $ARGUMENTS
 
 ```
 review-file
+├── Read `policies/review-rules.md` for severity classification rules
 ├── EXPLORE >> findings
 ├── SHOW_PLAN >> target | file_count | critical_count | warning_count | info_count
 ├── IF << critical findings present
@@ -34,7 +35,6 @@ review-file
 
 ## Rules
 
-- Read `policies/review-rules.md` before classifying any finding
 - Only report what is observable in the provided files — do not speculate
 - Suggested fixes must be concrete: show the corrected code snippet, not just a description
 

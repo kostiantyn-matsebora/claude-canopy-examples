@@ -1,6 +1,6 @@
 # Git Commands
 
-## GET_COMMITS_SINCE_TAG
+# === GET_COMMITS_SINCE_TAG ===
 
 Gets all commit messages since the most recent git tag.
 Falls back to all commits if no tag exists.
