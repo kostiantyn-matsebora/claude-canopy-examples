@@ -31,11 +31,11 @@ Open the repository in your AI coding assistant and invoke any of the example sk
 
 | Skill | Invocation example | Tree syntax |
 | --- | --- | --- |
-| `generate-readme` | `Generate or update the README for this project` | box-drawing |
-| `add-changelog-entry` | `Add changelog entry for version 1.0.0` | box-drawing |
-| `review-file` | `Review src/auth.py` | box-drawing |
-| `scaffold-skill` | `Scaffold a new skill called my-skill` | markdown list (`*`) |
-| `bump-version` | `Bump version to 2.1.0` | markdown list (`*`) |
+| [`generate-readme`](.claude/skills/generate-readme/skill.md) | `Generate or update the README for this project` | box-drawing |
+| [`add-changelog-entry`](.claude/skills/add-changelog-entry/skill.md) | `Add changelog entry for version 1.0.0` | box-drawing |
+| [`review-file`](.claude/skills/review-file/skill.md) | `Review src/auth.py` | box-drawing |
+| [`scaffold-skill`](.claude/skills/scaffold-skill/skill.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
+| [`bump-version`](.claude/skills/bump-version/skill.md) | `Bump version to 2.1.0` | markdown list (`*`) |
 
 Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
