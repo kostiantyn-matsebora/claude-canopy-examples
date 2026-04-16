@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": ["current_version", "files_to_update", "changelog_exists"],
+  "required": ["current_version", "primary_version_file", "files_to_update", "changelog_exists"],
   "properties": {
     "current_version": {
       "type": "string",
