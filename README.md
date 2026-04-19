@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- [Git](https://git-scm.com/) 2.20+ (for submodule support)
+- [Git](https://git-scm.com/) 2.25+
 - Any Claude Code-compatible AI coding assistant — for example:
   - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (`claude` in your terminal)
   - [VS Code](https://code.visualstudio.com/) with [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) or the [Claude extension](https://marketplace.visualstudio.com/items?itemName=Anthropic.claude-code)
@@ -13,16 +13,18 @@
 ## Installation
 
 ```bash
-git clone --recurse-submodules https://github.com/kostiantyn-matsebora/claude-canopy-examples
+git clone https://github.com/kostiantyn-matsebora/claude-canopy-examples
 cd claude-canopy-examples
-.\.claude\canopy\setup.ps1
+pwsh .claude\canopy\setup.ps1    # Windows
+bash .claude/canopy/setup.sh     # Linux / macOS
 ```
 
-> If you cloned without `--recurse-submodules`, run:
+The setup script creates junctions/symlinks so Claude Code can discover the bundled Canopy skills and agents. Re-run it after each `git pull` that updates `.claude/canopy/`.
+
+> **Updating Canopy:** pull the latest framework into this repo's history:
 >
 > ```bash
-> git submodule update --init
-> .\.claude\canopy\setup.ps1
+> git subtree pull --prefix=.claude/canopy https://github.com/kostiantyn-matsebora/claude-canopy master --squash
 > ```
 
 ## Usage
