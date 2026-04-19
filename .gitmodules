@@ -1,3 +1,0 @@
-[submodule ".claude/canopy"]
-	path = .claude/canopy
-	url = git@github.com:kostiantyn-matsebora/claude-canopy.git
