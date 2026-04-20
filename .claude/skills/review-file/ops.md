@@ -8,6 +8,7 @@
 REPORT_FINDINGS << severity
 ├── filter findings from EXPLORE output where finding.severity == severity
 ├── sort by file path then line number
+├── cap to 10 findings per file; if any were dropped, note "<N> additional <severity> findings omitted in <file>"
 ├── IF << header_message provided
 │   └── print header_message as a blockquote callout before the list
 └── for each finding

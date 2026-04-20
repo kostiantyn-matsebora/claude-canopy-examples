@@ -20,9 +20,12 @@ add-changelog-entry
 ├── CLASSIFY_COMMITS << commits >> {added, changed, fixed, removed}
 ├── SHOW_PLAN >> version | date | added | changed | fixed | removed
 ├── ASK << Proceed? | Yes | No
-├── Read `policies/changelog-rules.md` for entry formatting rules
-├── PREPEND_ENTRY << version
-└── VERIFY_EXPECTED
+├── IF << Yes
+│   ├── Read `policies/changelog-rules.md` for entry formatting rules
+│   ├── PREPEND_ENTRY << version
+│   └── VERIFY_EXPECTED << verify/verify-expected.md
+└── ELSE
+    └── Cancelled by user.
 ```
 
 ---

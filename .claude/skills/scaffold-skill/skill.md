@@ -18,9 +18,13 @@ New skill name: $ARGUMENTS
     * END Skill already exists — choose a different name or delete the existing one first
   * SHOW_PLAN >> skill name | files to create | directories to create
   * ASK << Proceed? | Yes | No
-  * CREATE_SKILL_FILES << $ARGUMENTS
-  * confirm files created
-  * print next steps to user
+  * IF << Yes
+    * CREATE_SKILL_FILES << $ARGUMENTS
+    * confirm files created
+    * print next steps to user
+    * VERIFY_EXPECTED << verify/verify-expected.md
+  * ELSE
+    * Cancelled by user.
 
 ## Rules
 

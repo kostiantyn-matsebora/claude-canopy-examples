@@ -9,6 +9,7 @@ Skill-specific ops. Highest priority in the three-level lookup order.
 ```
 MERGE_README << context
 ├── Read `README.md` for existing content and custom sections.
+├── Read `templates/readme.md` to identify standard sections.
 ├── identify user-written custom sections (headings not in templates/readme.md)
 ├── regenerate all standard sections from context
 ├── re-insert custom sections at their original positions

@@ -18,9 +18,9 @@ Review: $ARGUMENTS
 
 ```
 review-file
-├── Read `policies/review-rules.md` for severity classification rules
-├── EXPLORE >> findings
+├── EXPLORE >> context
 ├── SHOW_PLAN >> target | file_count | critical_count | warning_count | info_count
+├── Read `policies/review-rules.md` for severity classification rules
 ├── IF << critical findings present
 │   └── REPORT_FINDINGS << critical | "Critical — must fix before merge"
 ├── IF << warning findings present

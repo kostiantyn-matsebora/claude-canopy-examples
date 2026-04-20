@@ -16,15 +16,11 @@ COLLECT_COMMITS >> commits
 
 ## CLASSIFY_COMMITS << commits >> {added, changed, fixed, removed}
 
-Group each commit message by conventional-commit prefix:
-
-- `feat:` or `feat(<scope>):` maps to Added
-- `fix:` or `fix(<scope>):` maps to Fixed
-- `refactor:` / `perf:` / `chore:` maps to Changed
-- `revert:` / `remove:` / `delete:` maps to Removed
-- unrecognized prefix or plain message maps to Changed
-
-Strip the prefix and scope before recording the message text.
+```
+CLASSIFY_COMMITS << commits >> {added, changed, fixed, removed}
+├── Read `constants/commit-types.md` for prefix-to-category mapping
+└── group each commit into Added, Changed, Fixed, or Removed using the mapping
+```
 
 ---
 
@@ -34,5 +30,6 @@ Strip the prefix and scope before recording the message text.
 PREPEND_ENTRY << version
 ├── Read `templates/entry.md`
 ├── substitute <version>, <date>, <added>, <changed>, <fixed>, <removed>
+├── remove any category section (### heading + its content) whose substituted value is empty
 └── insert rendered entry immediately after the CHANGELOG.md header block
 ```
