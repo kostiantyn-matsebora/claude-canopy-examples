@@ -10,7 +10,13 @@ Generate or update README at: $ARGUMENTS (default: README.md)
 
 ## Agent
 
-**explore** — reads the project root for: any existing README.md, package manifests (package.json, pyproject.toml, Cargo.toml, go.mod), top-level source directories, and .gitignore.
+**explore** — reads the project root to populate the README context. Output contract: `schemas/explore-schema.json`.
+
+Sub-tasks:
+- Detect any existing `README.md` at the target path
+- Detect package manifests — see `constants/package-manifests.md`
+- Detect top-level source directories
+- Detect `.gitignore` presence
 
 ---
 
