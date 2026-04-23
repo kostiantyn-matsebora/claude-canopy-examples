@@ -12,8 +12,7 @@ This repository contains example skills for [Canopy](https://github.com/kostiant
 
 ```
 .claude/skills/
-├── canopy-agent/                  <- gh skill install: heavy agent skill
-├── canopy/                        <- gh skill install: /canopy slash-command wrapper
+├── canopy/                        <- gh skill install: /canopy agent skill
 ├── canopy-debug/                  <- gh skill install: /canopy-debug trace meta-skill
 ├── canopy-help/                   <- gh skill install: /canopy-help operations reference
 ├── add-changelog-entry/           <- example: add a CHANGELOG entry
@@ -47,7 +46,7 @@ Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
 1. `<skill>/ops.md` — skill-local
 2. Consumer-defined cross-skill ops (optional; package as your own skill — no built-in location)
-3. `.claude/skills/canopy-agent/references/framework-ops.md` — framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …)
+3. `.claude/skills/canopy/references/framework-ops.md` — framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …)
 
 ### Tree syntax (both forms are equivalent)
 
@@ -123,11 +122,10 @@ Every operation shows a plan and asks for confirmation before making changes.
 ## Updating Canopy
 
 ```bash
-# Update one skill (or all four) to a newer release
-gh skill update kostiantyn-matsebora/claude-canopy canopy-agent --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy        --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy-debug  --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy-help   --pin v0.18.0
+# Update all three skills to a newer release
+gh skill update kostiantyn-matsebora/claude-canopy canopy       --pin v0.18.0
+gh skill update kostiantyn-matsebora/claude-canopy canopy-debug --pin v0.18.0
+gh skill update kostiantyn-matsebora/claude-canopy canopy-help  --pin v0.18.0
 ```
 
 ## Commits
