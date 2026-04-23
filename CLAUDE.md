@@ -12,9 +12,8 @@ This repository contains example skills for [Canopy](https://github.com/kostiant
 
 ```
 .claude/skills/
-├── canopy/                        <- gh skill install: /canopy agent skill
+├── canopy/                        <- gh skill install: /canopy agent skill (run /canopy help for operations reference)
 ├── canopy-debug/                  <- gh skill install: /canopy-debug trace meta-skill
-├── canopy-help/                   <- gh skill install: /canopy-help operations reference
 ├── add-changelog-entry/           <- example: add a CHANGELOG entry
 ├── bump-version/                  <- example: bump semantic versions
 ├── generate-readme/               <- example: generate or update README.md
@@ -122,10 +121,9 @@ Every operation shows a plan and asks for confirmation before making changes.
 ## Updating Canopy
 
 ```bash
-# Update all three skills to a newer release
+# Update both skills to a newer release
 gh skill update kostiantyn-matsebora/claude-canopy canopy       --pin v0.18.0
 gh skill update kostiantyn-matsebora/claude-canopy canopy-debug --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy-help  --pin v0.18.0
 ```
 
 ## Commits
