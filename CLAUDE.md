@@ -6,20 +6,23 @@ This repository contains example skills for [Canopy](https://github.com/kostiant
 
 - **Purpose:** Working examples to learn from, copy, and adapt into your own projects.
 - **Not a framework repo.** Framework changes belong in `claude-canopy`, not here.
-- **Canopy delivery:** Canopy ships as four [agentskills.io](https://agentskills.io)-format Agent Skills installed via `gh skill install` (GitHub CLI v2.90.0+). No more git subtree, no more setup scripts.
+- **Canopy delivery:** Canopy ships as three [agentskills.io](https://agentskills.io)-format Agent Skills — `canopy-runtime` (execution engine, minimum install), `canopy` (authoring agent, provides `/canopy`), `canopy-debug` (trace wrapper). Installed via `install.sh` / `install.ps1` (recommended — also writes ambient `CLAUDE.md` block) or `gh skill install` (GitHub CLI v2.90.0+). No more git subtree, no more setup scripts.
 
 ## Directory layout
 
 ```
 .claude/skills/
-├── canopy/                        <- gh skill install: /canopy agent skill (run /canopy help for operations reference)
-├── canopy-debug/                  <- gh skill install: /canopy-debug trace meta-skill
+├── canopy-runtime/                <- execution engine (platform rules, primitives, category semantics); hidden from / menu
+├── canopy/                        <- /canopy authoring agent (run /canopy help for ops reference)
+├── canopy-debug/                  <- /canopy-debug trace wrapper
 ├── add-changelog-entry/           <- example: add a CHANGELOG entry
 ├── bump-version/                  <- example: bump semantic versions
 ├── generate-readme/               <- example: generate or update README.md
 ├── review-file/                   <- example: structured code review
 └── scaffold-skill/                <- example: scaffold a new skill skeleton
 ```
+
+`CLAUDE.md` at the repo root contains a `<!-- canopy-runtime-begin -->` marker block (written by the install script) that ambiently activates `canopy-runtime` for every session. User skills stay runtime-unaware.
 
 ## Canopy quick reference
 
@@ -45,7 +48,7 @@ Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
 1. `<skill>/ops.md` — skill-local
 2. Consumer-defined cross-skill ops (optional; package as your own skill — no built-in location)
-3. `.claude/skills/canopy/references/framework-ops.md` — framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …)
+3. `.claude/skills/canopy-runtime/references/framework-ops.md` — framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …)
 
 ### Tree syntax (both forms are equivalent)
 
@@ -120,10 +123,18 @@ Every operation shows a plan and asks for confirmation before making changes.
 
 ## Updating Canopy
 
+Easiest path — re-run the install script, which updates all three skills AND the CLAUDE.md marker block idempotently:
+
 ```bash
-# Update both skills to a newer release
-gh skill update kostiantyn-matsebora/claude-canopy canopy       --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy-debug --pin v0.18.0
+curl -sSL https://raw.githubusercontent.com/kostiantyn-matsebora/claude-canopy/master/install.sh | bash -s -- --version 0.18.0
+```
+
+Or per-skill via `gh skill` (does NOT update CLAUDE.md marker block):
+
+```bash
+gh skill update kostiantyn-matsebora/claude-canopy canopy-runtime --pin v0.18.0
+gh skill update kostiantyn-matsebora/claude-canopy canopy         --pin v0.18.0
+gh skill update kostiantyn-matsebora/claude-canopy canopy-debug   --pin v0.18.0
 ```
 
 ## Commits
