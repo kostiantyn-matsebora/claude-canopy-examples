@@ -21,11 +21,13 @@ Then inside Claude Code (or run `claude` to start a session), execute:
 ```
 /plugin marketplace add kostiantyn-matsebora/claude-canopy
 /plugin install canopy@claude-canopy
+/canopy:canopy activate
 ```
 
-That installs all three framework skills (`canopy-runtime`, `canopy`, `canopy-debug`) at user scope. The example skills in this repo become interpretable in any Claude Code session that has the plugin installed — nothing else to wire up.
+- The first two commands install all three framework skills (`canopy-runtime`, `canopy`, `canopy-debug`) at user scope — run them once per machine.
+- The third command (`activate`, canopy v0.17.1+) writes the canopy-runtime marker block to this project's `CLAUDE.md` so the example skills under `.claude/skills/` load runtime ambiently. Run it once per project — install scripts (`install.sh` / `install.ps1`) do this for you, but plugin install does not.
 
-> **Updating Canopy:** `/plugin update canopy@claude-canopy` from any Claude Code session.
+> **Updating Canopy:** `/plugin update canopy@claude-canopy` from any Claude Code session, then re-run `/canopy:canopy activate` if the canopy-runtime marker block content changed in the new release.
 
 ## Usage
 

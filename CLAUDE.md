@@ -15,11 +15,14 @@ Inside any Claude Code session, run:
 ```
 /plugin marketplace add kostiantyn-matsebora/claude-canopy
 /plugin install canopy@claude-canopy
+/canopy:canopy activate
 ```
 
-That installs all three framework skills as a single bundle. They become available as `/canopy:canopy` (authoring agent) and `/canopy:canopy-debug` (trace wrapper); `canopy-runtime` is hidden from the `/` menu and loaded ambiently to interpret the example skills in this repo.
+The first two commands install all three framework skills as a single user-scope bundle. They become available as `/canopy:canopy` (authoring agent) and `/canopy:canopy-debug` (trace wrapper); `canopy-runtime` is hidden from the `/` menu.
 
-To verify the install: open this repo in Claude Code and run `/canopy:canopy help` — you should see the canopy authoring agent's op reference. If the command isn't found, the plugin install didn't take.
+The third command (`activate`, added in canopy v0.17.1) writes the canopy-runtime marker block to this project's `CLAUDE.md`. That block tells Claude how to interpret the example skills under `.claude/skills/` — without it, plugin install discovers `/canopy:canopy` but user skills don't load runtime ambiently. Re-run `activate` per project, not per session.
+
+To verify the install: open this repo in Claude Code and run `/canopy:canopy help` — you should see the canopy authoring agent's op reference. To verify activation: confirm `CLAUDE.md` contains `<!-- canopy-runtime-begin -->` and a corresponding `<!-- canopy-runtime-end -->`.
 
 ## Directory layout
 
