@@ -6,15 +6,25 @@ This repository contains example skills for [Canopy](https://github.com/kostiant
 
 - **Purpose:** Working examples to learn from, copy, and adapt into your own projects.
 - **Not a framework repo.** Framework changes belong in `claude-canopy`, not here.
-- **Canopy delivery:** Canopy ships as three [agentskills.io](https://agentskills.io)-format Agent Skills — `canopy-runtime` (execution engine, minimum install), `canopy` (authoring agent, provides `/canopy`), `canopy-debug` (trace wrapper). Installed via `install.sh` / `install.ps1` (recommended — also writes ambient `CLAUDE.md` block) or `gh skill install` (GitHub CLI v2.90.0+). No more git subtree, no more setup scripts.
+- **Canopy delivery in this repo:** Canopy is installed as a **Claude Code plugin** at user scope. The framework skills (`canopy`, `canopy-runtime`, `canopy-debug`) are NOT bundled in this repo — they live in the Claude Code plugin cache (`~/.claude/plugins/cache/claude-canopy/...`) once you've installed the plugin.
+
+## One-time setup
+
+Inside any Claude Code session, run:
+
+```
+/plugin marketplace add kostiantyn-matsebora/claude-canopy
+/plugin install canopy@claude-canopy
+```
+
+That installs all three framework skills as a single bundle. They become available as `/canopy:canopy` (authoring agent) and `/canopy:canopy-debug` (trace wrapper); `canopy-runtime` is hidden from the `/` menu and loaded ambiently to interpret the example skills in this repo.
+
+To verify the install: open this repo in Claude Code and run `/canopy:canopy help` — you should see the canopy authoring agent's op reference. If the command isn't found, the plugin install didn't take.
 
 ## Directory layout
 
 ```
 .claude/skills/
-├── canopy-runtime/                <- execution engine (platform rules, primitives, category semantics); hidden from / menu
-├── canopy/                        <- /canopy authoring agent (run /canopy help for ops reference)
-├── canopy-debug/                  <- /canopy-debug trace wrapper
 ├── add-changelog-entry/           <- example: add a CHANGELOG entry
 ├── bump-version/                  <- example: bump semantic versions
 ├── generate-readme/               <- example: generate or update README.md
@@ -22,7 +32,7 @@ This repository contains example skills for [Canopy](https://github.com/kostiant
 └── scaffold-skill/                <- example: scaffold a new skill skeleton
 ```
 
-`CLAUDE.md` at the repo root contains a `<!-- canopy-runtime-begin -->` marker block (written by the install script) that ambiently activates `canopy-runtime` for every session. User skills stay runtime-unaware.
+The framework itself is not in this tree — it comes from the plugin install above.
 
 ## Canopy quick reference
 
@@ -48,7 +58,7 @@ Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
 1. `<skill>/ops.md` — skill-local
 2. Consumer-defined cross-skill ops (optional; package as your own skill — no built-in location)
-3. `.claude/skills/canopy-runtime/references/framework-ops.md` — framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …)
+3. Framework primitives (`IF`, `ELSE`, `SWITCH`, `FOR_EACH`, `ASK`, `SHOW_PLAN`, `VERIFY_EXPECTED`, …) — defined in the plugin's `canopy-runtime/references/framework-ops.md`
 
 ### Tree syntax (both forms are equivalent)
 
@@ -89,18 +99,18 @@ skill-name
 5. **Verify** — `VERIFY_EXPECTED` against checklist
 6. **Respond** — emit declared output format
 
-## Using the canopy agent
+## Using the canopy authoring agent
 
-Invoke with `/canopy` (or natural language) in Claude Code:
+Invoke with `/canopy:canopy` (plugin-namespaced) in Claude Code:
 
 | Goal | What to say |
 |---|---|
-| Create a skill | `/canopy create a skill that does X` |
-| Scaffold blank | `/canopy scaffold my-skill` |
-| Modify | `/canopy add a dry-run option to the deploy skill` |
-| Validate | `/canopy validate bump-version` |
-| Improve | `/canopy improve review-file` |
-| Help | `/canopy help` |
+| Create a skill | `/canopy:canopy create a skill that does X` |
+| Scaffold blank | `/canopy:canopy scaffold my-skill` |
+| Modify | `/canopy:canopy add a dry-run option to the deploy skill` |
+| Validate | `/canopy:canopy validate bump-version` |
+| Improve | `/canopy:canopy improve review-file` |
+| Help | `/canopy:canopy help` |
 
 Every operation shows a plan and asks for confirmation before making changes.
 
@@ -123,23 +133,22 @@ Every operation shows a plan and asks for confirmation before making changes.
 
 ## Updating Canopy
 
-Easiest path — re-run the install script, which updates all three skills AND the CLAUDE.md marker block idempotently:
+Plugins update via Claude Code's own update mechanism:
 
-```bash
-curl -sSL https://raw.githubusercontent.com/kostiantyn-matsebora/claude-canopy/master/install.sh | bash -s -- --version 0.18.0
+```
+/plugin update canopy@claude-canopy
 ```
 
-Or per-skill via `gh skill` (does NOT update CLAUDE.md marker block):
+Or remove and reinstall to pick up the latest:
 
-```bash
-gh skill update kostiantyn-matsebora/claude-canopy canopy-runtime --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy         --pin v0.18.0
-gh skill update kostiantyn-matsebora/claude-canopy canopy-debug   --pin v0.18.0
+```
+/plugin uninstall canopy@claude-canopy
+/plugin install canopy@claude-canopy
 ```
 
 ## Commits
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 - `feat: add release-note generator example`
-- `chore: update canopy skills to vX.Y.Z`
+- `chore: switch canopy install to plugin model`
 - `docs: clarify example skill invocations`

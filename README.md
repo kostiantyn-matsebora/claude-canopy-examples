@@ -5,43 +5,43 @@
 ## Prerequisites
 
 - [Git](https://git-scm.com/) 2.25+
-- Any Claude Code-compatible AI coding assistant — for example:
-  - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (`claude` in your terminal)
-  - [VS Code](https://code.visualstudio.com/) with [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) or the [Claude extension](https://marketplace.visualstudio.com/items?itemName=Anthropic.claude-code)
-  - Any editor or CLI that supports the `.claude/` skill and agent conventions
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`claude` in your terminal) — required to install the Canopy plugin
 
 ## Installation
+
+Clone the repo and install the Canopy framework as a Claude Code plugin (one time, user-scoped):
 
 ```bash
 git clone https://github.com/kostiantyn-matsebora/claude-canopy-examples
 cd claude-canopy-examples
-pwsh .claude\canopy\setup.ps1    # Windows
-bash .claude/canopy/setup.sh     # Linux / macOS
 ```
 
-The setup script creates junctions/symlinks so Claude Code can discover the bundled Canopy skills and agents. Re-run it after each `git pull` that updates `.claude/canopy/`.
+Then inside Claude Code (or run `claude` to start a session), execute:
 
-> **Updating Canopy:** pull the latest framework into this repo's history:
->
-> ```bash
-> git subtree pull --prefix=.claude/canopy https://github.com/kostiantyn-matsebora/claude-canopy master --squash
-> ```
+```
+/plugin marketplace add kostiantyn-matsebora/claude-canopy
+/plugin install canopy@claude-canopy
+```
+
+That installs all three framework skills (`canopy-runtime`, `canopy`, `canopy-debug`) at user scope. The example skills in this repo become interpretable in any Claude Code session that has the plugin installed — nothing else to wire up.
+
+> **Updating Canopy:** `/plugin update canopy@claude-canopy` from any Claude Code session.
 
 ## Usage
 
-Open the repository in your AI coding assistant and invoke any of the example skills:
+Open the repository in Claude Code and invoke any of the example skills by name (or by stating the goal):
 
 | Skill | Invocation example | Tree syntax |
 | --- | --- | --- |
-| [`generate-readme`](.claude/skills/generate-readme/skill.md) | `Generate or update the README for this project` | box-drawing |
-| [`add-changelog-entry`](.claude/skills/add-changelog-entry/skill.md) | `Add changelog entry for version 1.0.0` | box-drawing |
-| [`review-file`](.claude/skills/review-file/skill.md) | `Review src/auth.py` | box-drawing |
-| [`scaffold-skill`](.claude/skills/scaffold-skill/skill.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
-| [`bump-version`](.claude/skills/bump-version/skill.md) | `Bump version to 2.1.0` | markdown list (`*`) |
+| [`generate-readme`](.claude/skills/generate-readme/SKILL.md) | `Generate or update the README for this project` | box-drawing |
+| [`add-changelog-entry`](.claude/skills/add-changelog-entry/SKILL.md) | `Add changelog entry for version 1.0.0` | box-drawing |
+| [`review-file`](.claude/skills/review-file/SKILL.md) | `Review src/auth.py` | box-drawing |
+| [`scaffold-skill`](.claude/skills/scaffold-skill/SKILL.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
+| [`bump-version`](.claude/skills/bump-version/SKILL.md) | `Bump version to 2.1.0` | markdown list (`*`) |
 
 Each skill lives under `.claude/skills/<skill-name>/` and contains:
 
-- `skill.md` — the skill definition (frontmatter + Tree + Rules)
+- `SKILL.md` — the skill definition (frontmatter + Tree + Rules)
 - `ops.md` — skill-local op definitions
 - `schemas/`, `templates/`, `policies/`, `commands/`, `verify/` — supporting resources
 
@@ -79,7 +79,7 @@ skill-name
 \`\`\`
 ```
 
-See the [Canopy framework documentation](https://github.com/kostiantyn-matsebora/claude-canopy) for the full skill anatomy reference.
+See the [Canopy framework documentation](https://github.com/kostiantyn-matsebora/claude-canopy) for the full skill anatomy reference. To author or modify skills with the framework's authoring agent, run `/canopy:canopy help` inside Claude Code (the plugin namespace prefix `canopy:` resolves the plugin's bundled commands).
 
 ## Contributing
 
