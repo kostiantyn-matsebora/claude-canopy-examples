@@ -10,7 +10,11 @@ New version: $ARGUMENTS
 
 ## Agent
 
-**explore** — reads the project root for version-bearing files (package.json, pyproject.toml, Cargo.toml, go.mod, version.txt, any .csproj files) and the current CHANGELOG.md if present.
+**explore** — scan the project root and detect version-bearing files and changelog state. Output contract: `schemas/explore-schema.json`.
+
+Sub-tasks:
+- Locate version-bearing files — see `constants/version-file-types.md`
+- Detect whether CHANGELOG.md exists at the project root
 
 ---
 
@@ -30,7 +34,7 @@ New version: $ARGUMENTS
   * IF << CHANGELOG.md exists
     * BUMP_CHANGELOG << new_version
   * ELSE
-    * skip changelog — file not present
+    * skip changelog
   * VERIFY_EXPECTED << verify/verify-expected.md
 
 ## Rules

@@ -14,13 +14,17 @@ Update the version string in every file from `context.files_to_update`.
   * IF << Cargo.toml present
     * update `version =` under `[package]` to new_version
   * IF << go.mod present
-    * update module version suffix if major bump (v2+); otherwise skip (see bump-rules policy)
+    * IF << major version bump (new major > current major)
+      * update module version suffix to new_version
+    * ELSE
+      * skip go.mod
   * IF << version.txt present
     * replace entire file contents with new_version
   * IF << any .csproj files present
     * update `<Version>` and `<AssemblyVersion>` elements to new_version
   * IF << any files with type "other" present
-    * report each as a warning: cannot auto-update `<path>` (type: other) — update manually
+    * Read `templates/other-file-warning.md`
+    * report warning for each file substituting its path
 
 ---
 
