@@ -22,7 +22,24 @@ The first two commands install all three framework skills as a single user-scope
 
 The third command (`activate`, added in canopy v0.17.1) writes the canopy-runtime marker block to this project's `CLAUDE.md`. That block tells Claude how to interpret the example skills under `.claude/skills/` — without it, plugin install discovers `/canopy:canopy` but user skills don't load runtime ambiently. Re-run `activate` per project, not per session.
 
-To verify the install: open this repo in Claude Code and run `/canopy:canopy help` — you should see the canopy authoring agent's op reference. To verify activation: confirm `CLAUDE.md` contains `<!-- canopy-runtime-begin -->` and a corresponding `<!-- canopy-runtime-end -->`.
+To verify the install: open this repo in Claude Code and run `/canopy:canopy help` — you should see the canopy authoring agent's op reference. To verify activation: confirm `CLAUDE.md` contains `<!-- canopy-runtime-begin -->
+## Canopy Runtime
+
+Any `SKILL.md` under `.claude/skills/` or `.github/skills/` that declares a `## Tree`
+section is a canopy-flavored skill. Before interpreting it, load
+`<skills-root>/canopy-runtime/SKILL.md` and apply the execution model defined
+there — sections (`## Agent`, `## Tree`, `## Rules`, `## Response:`), tree
+notation (`<<`, `>>`, `|`), control-flow and interaction primitives, op lookup
+chain (skill-local ops.md → consumer project ops → framework primitives),
+category directory semantics (`schemas/`/`templates/`/`commands/`/`constants/`/
+`checklists/`/`policies/`/`verify/`/`references/`), subagent contract
+(`EXPLORE` as first node when `## Agent` declares `**explore**`), and the
+active platform runtime (`references/runtime-claude.md` or
+`references/runtime-copilot.md`).
+
+`<skills-root>` resolves to `.claude/skills/` on Claude Code and `.github/skills/`
+on Copilot.
+<!-- canopy-runtime-end -->`.
 
 ## Directory layout
 
