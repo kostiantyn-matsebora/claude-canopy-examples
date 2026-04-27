@@ -2,16 +2,19 @@
 
 ---
 
-## REPORT_FINDINGS \<\< severity [| header_message]
+## REPORT_FINDINGS \<\< severity
 
 ```
 REPORT_FINDINGS << severity
+├── Read `constants/severity-headers.md`
 ├── filter findings from EXPLORE output where finding.severity == severity
 ├── sort by file path then line number
-├── cap to 10 findings per file; if any were dropped, note "<N> additional <severity> findings omitted in <file>"
-├── IF << header_message provided
-│   └── print header_message as a blockquote callout before the list
-└── for each finding
-    ├── print "**<file>:<line>** — <description>"
+├── cap to 10 findings per file
+├── IF << more than 10 findings in any file
+│   └── report omitted count using `templates/omitted-findings-note.md`
+├── IF << header defined for this severity in severity-headers.md
+│   └── print header as a blockquote callout before the list
+└── FOR_EACH << finding in findings
+    ├── print finding using `templates/finding-line.md`
     └── print suggested fix as a fenced code block
 ```

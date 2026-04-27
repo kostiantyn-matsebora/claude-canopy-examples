@@ -10,7 +10,11 @@ Review: $ARGUMENTS
 
 ## Agent
 
-**explore** — read all files under `$ARGUMENTS`. Also read any linting or type-check config at the project root (eslint, tsconfig, pyproject.toml, .editorconfig, etc.) to understand the project's own standards.
+**explore** — read the review target and detect project coding standards. Output contract: `schemas/explore-schema.json`.
+
+Sub-tasks:
+- Read all files under `$ARGUMENTS`
+- Detect linting and type-check config files at the project root — see `constants/review-config-files.md`
 
 ---
 
@@ -22,13 +26,13 @@ review-file
 ├── SHOW_PLAN >> target | file_count | critical_count | warning_count | info_count
 ├── Read `policies/review-rules.md` for severity classification rules
 ├── IF << critical findings present
-│   └── REPORT_FINDINGS << critical | "Critical — must fix before merge"
+│   └── REPORT_FINDINGS << critical
 ├── IF << warning findings present
 │   └── REPORT_FINDINGS << warning
 ├── IF << info findings present
 │   └── REPORT_FINDINGS << info
 └── IF << no findings at any severity
-    └── Report: target passes review — no issues found
+    └── report from `constants/no-findings-message.md`
 ```
 
 ---
