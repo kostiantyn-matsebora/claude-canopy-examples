@@ -14,7 +14,7 @@ New skill name: $ARGUMENTS
   * validate $ARGUMENTS is a valid kebab-case identifier
   * IF << $ARGUMENTS is not valid kebab-case
     * END Skill name must be kebab-case (e.g. my-skill)
-  * IF << .claude/skills/$ARGUMENTS/ exists
+  * IF << <skills-root>/$ARGUMENTS/ exists
     * END Skill already exists — choose a different name or delete the existing one first
   * SHOW_PLAN >> skill name | files to create | directories to create
   * ASK << Proceed? | Yes | No
