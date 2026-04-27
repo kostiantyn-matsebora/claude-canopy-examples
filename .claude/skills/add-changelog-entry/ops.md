@@ -7,7 +7,8 @@
 ```
 COLLECT_COMMITS >> commits
 ├── Read `commands/commands-git.ps1` for GET_COMMITS_SINCE_TAG section
-├── run command; capture stdout as commits list
+├── run GET_COMMITS_SINCE_TAG command
+├── capture stdout as commits list
 └── IF << no commits found
     └── ASK << No commits since last tag. Continue anyway? | Yes | No
 ```

@@ -12,7 +12,9 @@ Add changelog entry for version: $ARGUMENTS
 
 ```
 add-changelog-entry
-├── Validate $ARGUMENTS is a valid semver string; END if not
+├── Validate $ARGUMENTS is a valid semver string
+├── IF << not valid semver
+│   └── END $ARGUMENTS is not a valid semver string
 ├── IF << CHANGELOG.md does not exist
 │   └── create CHANGELOG.md from `templates/changelog.md`
 ├── COLLECT_COMMITS >> commits
