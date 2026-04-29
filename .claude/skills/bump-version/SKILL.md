@@ -1,8 +1,16 @@
 ---
 name: bump-version
 description: Bump the project version across all version-bearing files (package.json, pyproject.toml, Cargo.toml, go.mod, etc.) and prepend a CHANGELOG entry. Uses the markdown list tree syntax.
-argument-hint: "<new-version>  (e.g. 2.1.0)"
+compatibility: Requires canopy-runtime for Claude Code (`gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`) or GitHub Copilot (`--agent github-copilot`). Execution on other platforms is not supported.
+metadata:
+  argument-hint: "<new-version>  (e.g. 2.1.0)"
 ---
+
+> **Runtime required:** This skill uses Canopy tree notation and requires the
+> canopy-runtime execution engine. If canopy-runtime is not active in your
+> current context, **stop immediately** — do not attempt to execute this skill.
+> Inform the user: "canopy-runtime must be installed and activated first.
+> Run: `gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`"
 
 New version: $ARGUMENTS
 
@@ -10,10 +18,10 @@ New version: $ARGUMENTS
 
 ## Agent
 
-**explore** — scan the project root and detect version-bearing files and changelog state. Output contract: `schemas/explore-schema.json`.
+**explore** — scan the project root and detect version-bearing files and changelog state. Output contract: `assets/schemas/explore-schema.json`.
 
 Sub-tasks:
-- Locate version-bearing files — see `constants/version-file-types.md`
+- Locate version-bearing files — see `assets/constants/version-file-types.md`
 - Detect whether CHANGELOG.md exists at the project root
 
 ---
@@ -29,13 +37,13 @@ Sub-tasks:
   * bind new_version = $ARGUMENTS
   * SHOW_PLAN >> current version | new version | files to update | changelog action
   * ASK << Proceed? | Yes | No
-  * Read `policies/bump-rules.md` for version update constraints
+  * Read `assets/policies/bump-rules.md` for version update constraints
   * BUMP_FILES << context | new_version
   * IF << CHANGELOG.md exists
     * BUMP_CHANGELOG << new_version
   * ELSE
     * skip changelog
-  * VERIFY_EXPECTED << verify/verify-expected.md
+  * VERIFY_EXPECTED << assets/verify/verify-expected.md
 
 ## Rules
 

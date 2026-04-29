@@ -1,8 +1,16 @@
 ---
 name: generate-readme
 description: Analyze the project structure and generate or update README.md. Covers purpose, prerequisites, installation, usage, and contributing sections. Preserves any custom sections the user has already written.
-argument-hint: "[target-path]  (default: ./README.md)"
+compatibility: Requires canopy-runtime for Claude Code (`gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`) or GitHub Copilot (`--agent github-copilot`). Execution on other platforms is not supported.
+metadata:
+  argument-hint: "[target-path]  (default: ./README.md)"
 ---
+
+> **Runtime required:** This skill uses Canopy tree notation and requires the
+> canopy-runtime execution engine. If canopy-runtime is not active in your
+> current context, **stop immediately** — do not attempt to execute this skill.
+> Inform the user: "canopy-runtime must be installed and activated first.
+> Run: `gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`"
 
 Generate or update README at: $ARGUMENTS (default: README.md)
 
@@ -10,11 +18,11 @@ Generate or update README at: $ARGUMENTS (default: README.md)
 
 ## Agent
 
-**explore** — reads the project root to populate the README context. Output contract: `schemas/explore-schema.json`.
+**explore** — reads the project root to populate the README context. Output contract: `assets/schemas/explore-schema.json`.
 
 Sub-tasks:
 - Detect any existing `README.md` at the target path
-- Detect package manifests — see `constants/package-manifests.md`
+- Detect package manifests — see `assets/constants/package-manifests.md`
 - Detect top-level source directories
 - Detect `.gitignore` presence
 
@@ -29,12 +37,12 @@ generate-readme
 ├── ASK << Proceed with generation? | Yes | No
 ├── IF << user chose No
 │   └── END Cancelled.
-├── Read `policies/readme-rules.md` for content and preservation rules.
+├── Read `assets/policies/readme-rules.md` for content and preservation rules.
 ├── IF << README already exists at target_file
 │   └── MERGE_README << context
 ├── ELSE
 │   └── CREATE_README << context
-└── VERIFY_EXPECTED << verify/verify-expected.md
+└── VERIFY_EXPECTED << assets/verify/verify-expected.md
 ```
 
 ---

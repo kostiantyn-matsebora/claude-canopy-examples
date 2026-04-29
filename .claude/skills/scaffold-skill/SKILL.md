@@ -1,8 +1,16 @@
 ---
 name: scaffold-skill
-description: Generate a new Canopy skill skeleton — creates skill.md, ops.md, and supporting directories under .claude/skills/<name>/. Uses the markdown list tree syntax.
-argument-hint: "<skill-name>"
+description: Generate a new Canopy skill skeleton — creates SKILL.md, references/ops.md, and standard agentskills.io subdirectories (scripts/, references/, assets/) under .claude/skills/<name>/. Uses the markdown list tree syntax.
+compatibility: Requires canopy-runtime for Claude Code (`gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`) or GitHub Copilot (`--agent github-copilot`). Execution on other platforms is not supported.
+metadata:
+  argument-hint: "<skill-name>"
 ---
+
+> **Runtime required:** This skill uses Canopy tree notation and requires the
+> canopy-runtime execution engine. If canopy-runtime is not active in your
+> current context, **stop immediately** — do not attempt to execute this skill.
+> Inform the user: "canopy-runtime must be installed and activated first.
+> Run: `gh skill install kostiantyn-matsebora/claude-canopy canopy-runtime --agent claude-code`"
 
 New skill name: $ARGUMENTS
 
@@ -22,13 +30,14 @@ New skill name: $ARGUMENTS
     * CREATE_SKILL_FILES << $ARGUMENTS
     * confirm files created
     * print next steps to user
-    * VERIFY_EXPECTED << verify/verify-expected.md
+    * VERIFY_EXPECTED << assets/verify/verify-expected.md
   * ELSE
     * Cancelled by user.
 
 ## Rules
 
 - Never overwrite an existing skill directory
-- Generated skill.md must use the markdown list tree syntax (`*` nested lists)
+- Generated SKILL.md must use the markdown list tree syntax (`*` nested lists), include the `compatibility` field, and open with the safety preamble guard block
+- Skill file must be named exactly `SKILL.md` (uppercase) per agentskills.io spec
 
 ## Response: Summary / Files created / Next steps
