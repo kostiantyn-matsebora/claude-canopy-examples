@@ -30,9 +30,12 @@ Update the version string in every file from `context.files_to_update`.
 
 ## BUMP_CHANGELOG << new_version
 
-Prepend a new version entry to CHANGELOG.md using today's date.
+Prepend a new version entry to CHANGELOG.md using today's date. Idempotent — if an entry for `new_version` already exists (e.g. a prior `add-changelog-entry` run for the same version), this op is a no-op.
 
 * BUMP_CHANGELOG << new_version
-  * read recent git commits since last tag >> commits
-  * classify commits into Added / Changed / Fixed / Removed buckets
-  * prepend formatted entry at top of CHANGELOG.md
+  * IF << CHANGELOG.md already contains a `## [new_version]` heading
+    * skip (entry for new_version already present — leave existing block untouched)
+  * ELSE
+    * read recent git commits since last tag >> commits
+    * classify commits into Added / Changed / Fixed / Removed buckets
+    * prepend formatted entry at top of CHANGELOG.md

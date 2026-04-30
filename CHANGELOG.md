@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-04-30
+
+### Fixed
+
+- **`scaffold-skill` verify-expected paths.** `.agents/skills/scaffold-skill/assets/verify/verify-expected.md` checked for stale paths (`skill.md` lowercase, `commands/` subdir) that the op never produces — every clean scaffold would have failed `VERIFY_EXPECTED`. Updated to check the standard agentskills.io layout (`SKILL.md` uppercase, `scripts/`, `references/`, `assets/{templates,constants,schemas,checklists,policies,verify}/`) — matches what `CREATE_SKILL_FILES` actually writes.
+- **`bump-version` CHANGELOG idempotency.** `BUMP_CHANGELOG` unconditionally prepended a new `## [version]` block, so the documented `add-changelog-entry <v>` → `bump-version <v>` sequence produced two duplicate entries for the same version. The op now skips when a heading for the target version already exists. `bump-version`'s `verify-expected.md` updated to allow either source for the entry.
+
 ## [0.5.0] - 2026-04-30
 
 **Sync with Canopy framework `v0.18.1`.** Repository converted into a self-contained, cross-client playground: framework + examples both vendored under `.agents/skills/`, no plugin install required. All five example skills migrated to the agentskills.io standard layout with spec-compliant `compatibility` frontmatter and structured safety preamble.
@@ -77,6 +84,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Submodule `.claude/canopy` updated to `d6bd2d7` (canopy v0.5.0)
 - README: Prerequisites broadened from VS Code + GitHub Copilot Chat to any Claude Code-compatible assistant (Claude Code CLI, VS Code extensions, etc.); usage section phrasing made tool-agnostic
 
+[0.5.1]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.5.0...v0.5.1
+[0.5.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/kostiantyn-matsebora/claude-canopy-examples/compare/v0.1.0...v0.2.0
