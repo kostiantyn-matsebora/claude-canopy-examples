@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-04-30
+
+**Sync with Canopy framework `v0.18.1`.** Repository converted into a self-contained, cross-client playground: framework + examples both vendored under `.agents/skills/`, no plugin install required. All five example skills migrated to the agentskills.io standard layout with spec-compliant `compatibility` frontmatter and structured safety preamble.
+
+### Changed
+
+- **Moved all skills to `.agents/skills/`** — the cross-client skills root recognized by canopy-runtime v0.18.1+ on both Claude Code and GitHub Copilot.
+  - **Was** — `.claude/skills/<skill>/` (Claude-only) plus duplicated copies under `.github/skills/<skill>/` (Copilot).
+  - **Now** — single `.agents/skills/<skill>/` location resolved by both clients. First-match-wins resolution falls back to `.claude/skills/` and `.github/skills/`, so the layout stays compatible with consumers on older runtimes.
+- **Vendored the Canopy framework** at `.agents/skills/canopy-runtime/`, `canopy/`, `canopy-debug/` (pinned to v0.18.1 via `gh skill install --dir .agents/skills --pin v0.18.1`).
+  - **Why** — `git clone` is now sufficient to use the repo. No `/plugin install canopy@claude-canopy` step.
+  - **Updating** — re-run `gh skill install --pin vX.Y.Z` for each framework skill, then bump `.canopy-version`.
+- **Migrated all five example skills to canonical agentskills.io layout.** Affects `add-changelog-entry`, `bump-version`, `generate-readme`, `review-file`, `scaffold-skill`.
+  - **Skill root** — only `SKILL.md` at the skill root.
+  - **Ops** — moved to `references/ops.md`.
+  - **Static resources** — moved to `assets/{templates,constants,schemas,policies,verify}/`.
+  - **Executable code** — moved to `scripts/` (was `commands/`).
+  - **Backward compatibility** — flat-layout skills authored elsewhere continue to work; canopy-runtime resolves `Read` references literally.
+- **Added `compatibility` field to every skill.**
+  - **Form** — free-text per agentskills.io spec.
+  - **Content** — declares the canopy-runtime requirement and names the source repo.
+  - **Install tools** — listed as alternatives (`gh skill install`, `git clone`, install scripts, plugin marketplace) so the agent picks based on its environment.
+- **Added structured safety preamble** at the top of every skill body.
+  - **Form** — labeled bullets (not stream-of-consciousness prose).
+  - **Detection** — canopy-runtime under `<skills-root>/`, or marker block in the instructions file.
+  - **Fail mode** — halts execution on agents without canopy-runtime active.
+- **Updated `CLAUDE.md` and `.github/copilot-instructions.md`** to the canonical canopy-runtime v0.18.1 marker block (lists all three skills roots in the new resolution order: `.agents/skills/` → `.claude/skills/` → `.github/skills/`).
+- **Rewrote install docs.**
+  - **`README.md` / `CLAUDE.md` / `CONTRIBUTING.md`** — describe the vendored, clone-and-go workflow on both clients. Plugin-install section removed.
+
 ## [0.4.0] - 2026-04-12
 
 ### Fixed
