@@ -21,13 +21,13 @@ Then inside Claude Code (or run `claude` to start a session), execute:
 ```
 /plugin marketplace add kostiantyn-matsebora/claude-canopy
 /plugin install canopy@claude-canopy
-/canopy:canopy activate
 ```
 
-- The first two commands install all three framework skills (`canopy-runtime`, `canopy`, `canopy-debug`) at user scope — run them once per machine.
-- The third command (`activate`, canopy v0.17.1+) writes the canopy-runtime marker block to this project's `CLAUDE.md` so the example skills under `.claude/skills/` load runtime ambiently. Run it once per project — install scripts (`install.sh` / `install.ps1`) do this for you, but plugin install does not.
+- These two commands install all three framework skills (`canopy-runtime`, `canopy`, `canopy-debug`) at user scope — run them once per machine.
+- Since canopy v0.18.0, **canopy-runtime self-activates on first load** — the runtime writes the marker block to this project's `CLAUDE.md` (or `.github/copilot-instructions.md` on Copilot) automatically when an agent first loads `canopy-runtime/SKILL.md`. No separate `/canopy:canopy activate` step is required.
+- The legacy `/canopy:canopy activate` op is still available — use it to force a re-write after a release that changed the marker block content.
 
-> **Updating Canopy:** `/plugin update canopy@claude-canopy` from any Claude Code session, then re-run `/canopy:canopy activate` if the canopy-runtime marker block content changed in the new release.
+> **Updating Canopy:** `/plugin update canopy@claude-canopy` from any Claude Code session. The next agent invocation re-applies activation idempotently.
 
 ## Usage
 
@@ -41,11 +41,15 @@ Open the repository in Claude Code and invoke any of the example skills by name 
 | [`scaffold-skill`](.claude/skills/scaffold-skill/SKILL.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
 | [`bump-version`](.claude/skills/bump-version/SKILL.md) | `Bump version to 2.1.0` | markdown list (`*`) |
 
-Each skill lives under `.claude/skills/<skill-name>/` and contains:
+Each skill lives under `.claude/skills/<skill-name>/` and follows the agentskills.io standard layout (canopy v0.18.0+):
 
-- `SKILL.md` — the skill definition (frontmatter + Tree + Rules)
-- `ops.md` — skill-local op definitions
-- `schemas/`, `templates/`, `policies/`, `commands/`, `verify/` — supporting resources
+- `SKILL.md` — the skill definition (frontmatter incl. `compatibility` + safety preamble + Tree + Rules + Response)
+- `references/ops.md` or `references/ops/<name>.md` — skill-local op definitions
+- `references/<other>.md` — supporting docs loaded on demand
+- `assets/templates/`, `assets/constants/`, `assets/schemas/`, `assets/policies/`, `assets/checklists/`, `assets/verify/` — static resources
+- `scripts/` — executable shell or PowerShell sections
+
+Older skills using the flat layout (category dirs at the skill root: `templates/`, `constants/`, `commands/`, etc.) continue to execute correctly — canopy-runtime resolves `Read` references literally. Run `/canopy:canopy improve <skill>` to migrate a legacy-layout skill to the standard layout.
 
 ### Tree syntax
 

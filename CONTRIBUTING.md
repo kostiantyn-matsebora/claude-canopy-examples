@@ -9,22 +9,31 @@ This repo contains example skills and usage patterns for Canopy. Good contributi
 - new example skills
 - improvements to existing examples
 - better onboarding and usage docs
-- fixes to submodule setup or local wiring
+- migrations to align with the latest Canopy framework conventions
 
 Framework changes should usually go in `claude-canopy`, not here.
 
 ## Getting Started
 
 1. Fork the repository.
-2. Clone with submodules: `git clone --recurse-submodules ...`
-3. Run `.claude/canopy/setup.ps1` or `.claude/canopy/setup.sh`.
+2. Clone: `git clone https://github.com/<your-fork>/claude-canopy-examples`
+3. Inside Claude Code, install the Canopy plugin once per machine:
+
+   ```
+   /plugin marketplace add kostiantyn-matsebora/claude-canopy
+   /plugin install canopy@claude-canopy
+   ```
+
+   canopy-runtime self-activates on first agent load (canopy v0.18.0+).
 4. Create a branch from `master`.
 5. Make focused changes.
 6. Open a pull request.
 
 ## Adding an Example Skill
 
-- Add the skill under `.claude/skills/<skill-name>/`.
+- Add the skill under `.claude/skills/<skill-name>/` following the agentskills.io standard layout — only `SKILL.md` at the skill root, with `references/ops.md` for ops, `assets/{templates,constants,schemas,policies,verify}/` for static resources, and `scripts/` for executable code.
+- Frontmatter must include `compatibility` (free-text, max 500 chars per agentskills.io spec) declaring the canopy-runtime requirement and source repo. Or just run `/canopy:canopy scaffold <skill-name>` — it generates the canonical structure.
+- Open the body with the structured safety preamble before `$ARGUMENTS` (also auto-inserted by `/canopy:canopy scaffold`).
 - Keep examples practical and easy to copy into a real project.
 - Prefer generic prompts and resources over domain-specific internal examples.
 - Document how to invoke the skill in `README.md` if it is user-facing.
@@ -33,9 +42,10 @@ Framework changes should usually go in `claude-canopy`, not here.
 
 Before opening a pull request, check:
 
-- the examples still work with the current `claude-canopy` submodule
+- the examples still execute correctly under the current Canopy plugin (`/plugin update canopy@claude-canopy` to refresh)
 - README setup instructions are still accurate
 - the new example demonstrates something distinct and useful
+- frontmatter passes `/canopy:canopy validate <skill-name>` (no Errors)
 
 ## Commit Messages
 
