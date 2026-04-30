@@ -7,19 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.0] - 2026-04-30
 
-Sync with Canopy framework `v0.18.0`. All five example skills migrated to the agentskills.io standard layout, with spec-compliant `compatibility` frontmatter and the structured safety preamble.
+**Sync with Canopy framework `v0.18.0`.** All five example skills migrated to the agentskills.io standard layout, with spec-compliant `compatibility` frontmatter and the structured safety preamble.
 
 ### Changed
 
-- **All example skills migrated to canonical agentskills.io layout** — only `SKILL.md` at the skill root; `references/ops.md` for ops; `assets/{templates,constants,schemas,policies,verify}/` for static resources; `scripts/` for executable code (was `commands/`). Affects `add-changelog-entry`, `bump-version`, `generate-readme`, `review-file`, `scaffold-skill`. Old flat layout no longer present in this repo, but canopy-runtime continues to support it for skills authored elsewhere.
-- **`compatibility` field added to every skill** — free-text per agentskills.io spec, declaring the canopy-runtime requirement and the source repo. Lists install tools (`gh skill install`, `git clone`, install scripts, plugin marketplace) as alternatives so the agent picks based on its environment.
-- **Structured safety preamble** at the top of every skill body — labeled bullets covering canopy-runtime detection (under `<skills-root>/`, marker block in instructions file) and what to do if neither is present. Halts execution on agents without canopy-runtime active.
-- **CLAUDE.md** rewritten to reflect canopy v0.18.0 — plugin install no longer requires explicit `/canopy:canopy activate`, canopy-runtime self-activates on first load, skill anatomy table reflects standard layout, op lookup chain now includes `references/ops/<name>.md`.
-- **README** install section trimmed: `/canopy:canopy activate` removed from one-time setup; activation now happens automatically on first agent load; skill structure section updated to canonical layout.
+- **Migrated all five skills to canonical agentskills.io layout.** Affects `add-changelog-entry`, `bump-version`, `generate-readme`, `review-file`, `scaffold-skill`.
+  - **Skill root** — only `SKILL.md` at the skill root.
+  - **Ops** — moved to `references/ops.md`.
+  - **Static resources** — moved to `assets/{templates,constants,schemas,policies,verify}/`.
+  - **Executable code** — moved to `scripts/` (was `commands/`).
+  - **Backward compatibility** — old flat layout no longer present in this repo; canopy-runtime continues to support it for skills authored elsewhere.
+- **Added `compatibility` field to every skill.**
+  - **Form** — free-text per agentskills.io spec.
+  - **Content** — declares the canopy-runtime requirement and names the source repo.
+  - **Install tools** — listed as alternatives (`gh skill install`, `git clone`, install scripts, plugin marketplace) so the agent picks based on its environment.
+- **Added structured safety preamble** at the top of every skill body.
+  - **Form** — labeled bullets (not stream-of-consciousness prose).
+  - **Detection** — canopy-runtime under `<skills-root>/`, or marker block in the instructions file.
+  - **Fail mode** — halts execution on agents without canopy-runtime active.
+- **Rewrote `CLAUDE.md` for canopy v0.18.0.**
+  - **Plugin install** — no longer requires explicit `/canopy:canopy activate`.
+  - **Activation** — canopy-runtime self-activates on first load.
+  - **Skill anatomy table** — reflects standard layout.
+  - **Op lookup chain** — now lists `references/ops/<name>.md`.
+- **Trimmed README install section.**
+  - **Removed** — `/canopy:canopy activate` from one-time setup.
+  - **Replaced with** — note that activation happens automatically on first agent load.
+  - **Skill structure section** — updated to canonical layout.
 
 ### Notes
 
-- The `add-changelog-entry` skill is also published on a dedicated `e2e-preview` branch at `skills/add-changelog-entry/` (canonical publishing location for `gh skill install`) — used as a test fixture for canopy's autonomous-agent E2E tests. Master branch keeps the conventional `.claude/skills/` placement so the examples repo serves as a fully checked-out workspace, not a publishing target.
+- **`add-changelog-entry` is also published on the `e2e-preview` branch** at `skills/add-changelog-entry/` (canonical publishing location for `gh skill install`).
+  - **Purpose** — test fixture for canopy's autonomous-agent E2E tests.
+  - **Master branch** — keeps the conventional `.claude/skills/` placement so the examples repo serves as a fully checked-out workspace, not a publishing target.
 
 ## [0.4.0] - 2026-04-12
 
