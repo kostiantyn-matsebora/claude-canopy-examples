@@ -2,20 +2,24 @@
 
 ## Skill directory
 
-- [ ] `.claude/skills/<skill_name>/` directory exists
+- [ ] `<skills-root>/<skill_name>/` directory exists
 
 ## Files
 
-- [ ] `.claude/skills/<skill_name>/skill.md` exists
-- [ ] `.claude/skills/<skill_name>/ops.md` exists
-- [ ] `skill.md` frontmatter `name` field equals `skill_name` (no `<skill-name>` placeholder)
-- [ ] No `<skill-name>` token remains anywhere in the generated `skill.md`
+- [ ] `<skills-root>/<skill_name>/SKILL.md` exists (uppercase, exact spelling per agentskills.io)
+- [ ] `<skills-root>/<skill_name>/references/ops.md` exists
+- [ ] `SKILL.md` frontmatter `name` field equals `skill_name` (no `<skill-name>` placeholder)
+- [ ] No `<skill-name>` token remains anywhere in the generated `SKILL.md`
 
 ## Subdirectories
 
-- [ ] `schemas/` subdirectory exists under the new skill directory
-- [ ] `policies/` subdirectory exists under the new skill directory
-- [ ] `templates/` subdirectory exists under the new skill directory
-- [ ] `constants/` subdirectory exists under the new skill directory
-- [ ] `commands/` subdirectory exists under the new skill directory
-- [ ] `verify/` subdirectory exists under the new skill directory
+Per `assets/constants/skill-subdirs.md` (standard agentskills.io layout):
+
+- [ ] `scripts/` subdirectory exists under the new skill directory
+- [ ] `references/` subdirectory exists under the new skill directory
+- [ ] `assets/templates/` subdirectory exists under the new skill directory
+- [ ] `assets/constants/` subdirectory exists under the new skill directory
+- [ ] `assets/schemas/` subdirectory exists under the new skill directory
+- [ ] `assets/checklists/` subdirectory exists under the new skill directory
+- [ ] `assets/policies/` subdirectory exists under the new skill directory
+- [ ] `assets/verify/` subdirectory exists under the new skill directory
