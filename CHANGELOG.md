@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **`parallel-review` example skill** — multi-aspect code review demonstrating the `PARALLEL` block primitive. Fans out four independent review subagents (security / performance / style / correctness) concurrently, each in its own context window, then merges findings into a unified severity-grouped report. **Requires canopy v0.19.0+** (PARALLEL primitive); the vendored framework will be bumped from 0.18.1 to 0.19.0 once the framework release ships.
+
+### Notes
+
+- This skill is the canonical example of the `PARALLEL` block primitive added in canopy v0.19.0. See the framework's [PRIMITIVES.md](https://github.com/kostiantyn-matsebora/claude-canopy/blob/master/docs/reference/PRIMITIVES.md) for the spec.
+
 ## [0.5.1] - 2026-04-30
 
 ### Fixed

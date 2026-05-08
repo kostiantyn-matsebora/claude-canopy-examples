@@ -51,6 +51,7 @@ Open the repository in Claude Code or VS Code/Copilot and invoke any of the exam
 | [`generate-readme`](.agents/skills/generate-readme/SKILL.md) | `Generate or update the README for this project` | box-drawing |
 | [`add-changelog-entry`](.agents/skills/add-changelog-entry/SKILL.md) | `Add changelog entry for version 1.0.0` | box-drawing |
 | [`review-file`](.agents/skills/review-file/SKILL.md) | `Review src/auth.py` | box-drawing |
+| [`parallel-review`](.agents/skills/parallel-review/SKILL.md) | `Run a parallel-review on src/auth.py` | box-drawing |
 | [`scaffold-skill`](.agents/skills/scaffold-skill/SKILL.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
 | [`bump-version`](.agents/skills/bump-version/SKILL.md) | `Bump version to 2.1.0` | markdown list (`*`) |
 
