@@ -5,10 +5,10 @@ license: MIT
 metadata:
     author: kostiantyn-matsebora
     github-path: skills/canopy-runtime
-    github-pinned: v0.19.0
-    github-ref: refs/tags/v0.19.0
+    github-pinned: v0.20.0
+    github-ref: refs/tags/v0.20.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
-    github-tree-sha: 6cab38cd230f9d13413121416b029b834273c9ed
+    github-tree-sha: 40edadb01174b23d47e67472f66558470bffd5a3
     user-invocable: "false"
     version: 0.18.1
 name: canopy-runtime

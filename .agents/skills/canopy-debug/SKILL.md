@@ -6,8 +6,8 @@ metadata:
     argument-hint: <skill-name> [skill-arguments]
     author: kostiantyn-matsebora
     github-path: skills/canopy-debug
-    github-pinned: v0.19.0
-    github-ref: refs/tags/v0.19.0
+    github-pinned: v0.20.0
+    github-ref: refs/tags/v0.20.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
     github-tree-sha: a972031b8f2fca5e6f181d9f9af7fa0fa35bf924
     version: 0.18.1
