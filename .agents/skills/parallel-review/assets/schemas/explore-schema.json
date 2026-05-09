@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["target", "file_count", "files", "aspects"],
+  "properties": {
+    "target": { "type": "string" },
+    "file_count": { "type": "integer" },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "language"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" }
+        }
+      }
+    },
+    "aspects": {
+      "type": "array",
+      "items": { "enum": ["security", "performance", "style", "correctness"] }
+    },
+    "lint_config_detected": { "type": "boolean" },
+    "type_check_config_detected": { "type": "boolean" }
+  }
+}
