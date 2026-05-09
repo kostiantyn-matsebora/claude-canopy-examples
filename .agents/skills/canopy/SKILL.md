@@ -6,10 +6,10 @@ license: MIT
 metadata:
     author: kostiantyn-matsebora
     github-path: skills/canopy
-    github-pinned: v0.18.1
-    github-ref: refs/tags/v0.18.1
+    github-pinned: v0.19.0
+    github-ref: refs/tags/v0.19.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
-    github-tree-sha: 5ba5bde4cefad892a23a8b82a186a76196ddfe59
+    github-tree-sha: 5428b0e7935865b61cf5480e84170859fe17d345
     version: 0.18.1
 name: canopy
 ---
