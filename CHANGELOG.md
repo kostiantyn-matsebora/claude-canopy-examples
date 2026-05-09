@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+Sync to canopy v0.20.0. Retrofits the `parallel-review` example onto the new subagent dispatch model — per-op markers + bold call-sites — replacing prose-driven subagent invocation under `PARALLEL`.
+
+### Changed
+
+- **`parallel-review` retrofitted to subagent dispatch model** (`.agents/skills/parallel-review/`):
+  - **`SKILL.md`** — `## Agent` section dropped. The four prose subagent invocations under `PARALLEL` become four bold-marked op calls: `**REVIEW_ASPECT** << aspect | context.files >> <findings_var>`. The first tree node becomes `**EXPLORE_TARGET** << $ARGUMENTS >> context` — explicit subagent dispatch instead of the legacy `## Agent` + `EXPLORE` sugar.
+  - **`references/ops.md`** — adds two subagent op definitions, each carrying the `> **Subagent.** Output contract: \`<schema>\`` marker:
+    - `## EXPLORE_TARGET << target_path >> context` — pointing at `assets/schemas/explore-schema.json`
+    - `## REVIEW_ASPECT << aspect | files >> findings` — pointing at `assets/schemas/aspect-findings-schema.json`
+  - `MERGE_ASPECT_FINDINGS` and `REPORT_BY_SEVERITY` stay as inline ops (no marker) — they aggregate already-collected findings and don't benefit from context isolation.
+  - Schema files unchanged.
+- **Vendored framework bumped to v0.20.0.** `canopy-runtime`, `canopy`, `canopy-debug` re-installed via `gh skill install --pin v0.20.0` once the framework tag is published.
+- **`.canopy-version`** → `0.20.0`.
+- **`compatibility` field on `parallel-review`** — declares the v0.20.0+ runtime requirement (subagent dispatch model).
+
+### Notes
+
+- The `parallel-review` retrofit is now the canonical example of the **subagent dispatch model** introduced in canopy v0.20.0 — each parallel child is a marker-anchored subagent call, not a prose instruction. PARALLEL composes naturally with marker-based dispatch.
+- Other example skills (`add-changelog-entry`, `bump-version`, `generate-readme`, `review-file`, `scaffold-skill`) are unchanged — they don't use subagent dispatch.
+
 ## [0.6.0] — 2026-05-09
 
 Sync to canopy v0.19.0. Adds a new example skill demonstrating the `PARALLEL` block primitive.
