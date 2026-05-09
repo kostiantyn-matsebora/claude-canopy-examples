@@ -5,11 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.7.0] — 2026-05-09
 
-Sync to canopy v0.20.0. Retrofits the `parallel-review` example onto the new subagent dispatch model — per-op markers + bold call-sites — replacing prose-driven subagent invocation under `PARALLEL`.
+Bundles two framework syncs: **v0.20.0** (subagent dispatch model — per-op markers + bold call-sites; `parallel-review` retrofitted as the canonical example) and **v0.21.0** (sliced primitive spec + per-skill `metadata.canopy-features` manifest; mixed retrofit demonstrating both annotation paths).
 
-### Changed
+### Added (v0.21.0 sync)
+
+- **`metadata.canopy-features` manifests** added to four example skills declaring which primitive families each one uses. The runtime lazy-loads only the named slices (per the v0.21.0 spec):
+
+  | Skill | Manifest |
+  |---|---|
+  | `bump-version` | `[interaction, control-flow, verify, explore]` |
+  | `scaffold-skill` | `[interaction, control-flow, verify]` |
+  | `parallel-review` | `[interaction, control-flow, parallel, subagent, verify]` |
+  | `review-file` | `[interaction, control-flow, explore]` |
+  | `add-changelog-entry` | *intentionally omitted (back-compat demo)* |
+  | `generate-readme` | *intentionally omitted (back-compat demo)* |
+
+- **Mixed retrofit shape** — `add-changelog-entry` and `generate-readme` are deliberately left without manifests so authors browsing this repo see both v0.21.0 paths side-by-side: explicit-declaration on most skills, and the v0.21.0 promise that pre-existing skills still execute correctly with no manifest at all (the runtime falls back to loading every slice).
+- **`metadata.canopy-features` row** added to the `CLAUDE.md` Feature coverage matrix, with a legend explaining the · marker on the two intentionally-undeclared skills.
+
+### Changed (v0.21.0 sync)
+
+- **Vendored framework bumped to v0.21.0.** `canopy-runtime`, `canopy`, `canopy-debug` re-installed via `gh skill install --pin v0.21.0`.
+- **`.canopy-version`** → `0.21.0`.
+- **Slim canopy-runtime marker block** — `CLAUDE.md` and `.github/copilot-instructions.md` updated to the v0.21.0 5-line trigger + pointer block (down from ~30 lines). The runtime spec (primitives, lookup chain, category layout) is now lazy-loaded only when canopy-runtime is actually engaged, instead of every session paying for it ambiently.
+
+### Changed (v0.20.0 sync — held over from prior cycle)
 
 - **`parallel-review` retrofitted to subagent dispatch model** (`.agents/skills/parallel-review/`):
   - **`SKILL.md`** — `## Agent` section dropped. The four prose subagent invocations under `PARALLEL` become four bold-marked op calls: `**REVIEW_ASPECT** << aspect | context.files >> <findings_var>`. The first tree node becomes `**EXPLORE_TARGET** << $ARGUMENTS >> context` — explicit subagent dispatch instead of the legacy `## Agent` + `EXPLORE` sugar.
@@ -18,14 +40,12 @@ Sync to canopy v0.20.0. Retrofits the `parallel-review` example onto the new sub
     - `## REVIEW_ASPECT << aspect | files >> findings` — pointing at `assets/schemas/aspect-findings-schema.json`
   - `MERGE_ASPECT_FINDINGS` and `REPORT_BY_SEVERITY` stay as inline ops (no marker) — they aggregate already-collected findings and don't benefit from context isolation.
   - Schema files unchanged.
-- **Vendored framework bumped to v0.20.0.** `canopy-runtime`, `canopy`, `canopy-debug` re-installed via `gh skill install --pin v0.20.0` once the framework tag is published.
-- **`.canopy-version`** → `0.20.0`.
 - **`compatibility` field on `parallel-review`** — declares the v0.20.0+ runtime requirement (subagent dispatch model).
 
 ### Notes
 
-- The `parallel-review` retrofit is now the canonical example of the **subagent dispatch model** introduced in canopy v0.20.0 — each parallel child is a marker-anchored subagent call, not a prose instruction. PARALLEL composes naturally with marker-based dispatch.
-- Other example skills (`add-changelog-entry`, `bump-version`, `generate-readme`, `review-file`, `scaffold-skill`) are unchanged — they don't use subagent dispatch.
+- The `parallel-review` retrofit is the canonical example of the **subagent dispatch model** introduced in canopy v0.20.0 — each parallel child is a marker-anchored subagent call, not a prose instruction. PARALLEL composes naturally with marker-based dispatch.
+- The mixed manifest retrofit is the canonical demonstration of the **per-skill slice manifest** introduced in canopy v0.21.0. Open the same example repo in vscode with the canopy-skills extension v0.14.0+ installed: the four annotated skills pass cleanly; `add-changelog-entry` and `generate-readme` surface the "manifest absent" warning (Warning, not Error — back-compat preserved).
 
 ## [0.6.0] — 2026-05-09
 

@@ -4,6 +4,7 @@ description: Generate a new Canopy skill skeleton — creates SKILL.md, referenc
 compatibility: Requires the canopy-runtime skill (published at github.com/kostiantyn-matsebora/claude-canopy). Install with any agentskills.io-compatible tool — e.g. `gh skill install`, `git clone`, the repo's `install.sh`/`install.ps1`, or the Claude Code plugin marketplace. Supports Claude Code and GitHub Copilot.
 metadata:
   argument-hint: "<skill-name>"
+  canopy-features: [interaction, control-flow, verify]
 ---
 
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
