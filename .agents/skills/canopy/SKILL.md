@@ -5,12 +5,16 @@ description: Authors, validates, improves, scaffolds, and refactors Canopy skill
 license: MIT
 metadata:
     author: kostiantyn-matsebora
+    canopy-features:
+        - interaction
+        - control-flow
+        - explore
     github-path: skills/canopy
-    github-pinned: v0.20.0
-    github-ref: refs/tags/v0.20.0
+    github-pinned: v0.21.0
+    github-ref: refs/tags/v0.21.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
-    github-tree-sha: 78eaa4e31697dbb1bfa0d8830c043ca4c7954b41
-    version: 0.18.1
+    github-tree-sha: 6924fa6d7c9cdc06a661822dbe0631c0dcf79727
+    version: 0.21.0
 name: canopy
 ---
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
@@ -42,13 +46,13 @@ $ARGUMENTS
   * IF << context.platform == "claude"
     * Read `../canopy-runtime/SKILL.md` for the canopy execution engine overview
     * Read `../canopy-runtime/references/runtime-claude.md` for Claude Code runtime rules
-    * Read `../canopy-runtime/references/framework-ops.md` for primitive spec
-    * Read `../canopy-runtime/references/skill-resources.md` for category semantics, op lookup chain, tree format, subagent contract
+    * Read `../canopy-runtime/references/ops.md` for the primitive-slice index (load specific slices on demand from individual ops)
+    * Read `../canopy-runtime/references/skill-resources.md` for category semantics, op lookup chain, tree format, manifest, subagent contract
   * ELSE
     * Read `../canopy-runtime/SKILL.md` for the canopy execution engine overview
     * Read `../canopy-runtime/references/runtime-copilot.md` for Copilot runtime rules
-    * Read `../canopy-runtime/references/framework-ops.md` for primitive spec
-    * Read `../canopy-runtime/references/skill-resources.md` for category semantics, op lookup chain, tree format, subagent contract
+    * Read `../canopy-runtime/references/ops.md` for the primitive-slice index (load specific slices on demand from individual ops)
+    * Read `../canopy-runtime/references/skill-resources.md` for category semantics, op lookup chain, tree format, manifest, subagent contract
   * SWITCH << context.operation
     * CASE << "CREATE"
       * Read `references/ops/create.md` and execute the CREATE procedure
@@ -70,10 +74,12 @@ $ARGUMENTS
       * Read `references/ops/convert-to-regular.md` and execute the CONVERT_TO_REGULAR procedure
     * CASE << "ACTIVATE"
       * Read `references/ops/activate.md` and execute the ACTIVATE procedure
+    * CASE << "MEASURE_CONTEXT"
+      * Read `references/ops/measure-context.md` and execute the MEASURE_CONTEXT procedure
     * CASE << "HELP"
       * Read `references/ops/help.md` and execute the HELP procedure
     * DEFAULT
-      * ASK << Could not determine the operation. What would you like to do? | Create a skill | Modify a skill | Scaffold a skill | Validate a skill | Improve a skill | Advise | Refactor skills | Convert to regular | Activate runtime | Help
+      * ASK << Could not determine the operation. What would you like to do? | Create a skill | Modify a skill | Scaffold a skill | Validate a skill | Improve a skill | Advise | Refactor skills | Convert to regular | Activate runtime | Measure context | Help
 
 ## Rules
 
@@ -87,8 +93,8 @@ $ARGUMENTS
 - Skill files must be exactly `SKILL.md` (uppercase) — case-sensitive filesystems require this
 - Skills with `## Tree` must have a `compatibility` field declaring canopy-runtime requirement and a safety preamble guard block at the top of the body
 - Frontmatter root contains only spec-allowed fields (`name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`); `argument-hint` and `user-invocable` go inside `metadata`
-- Framework primitives (IF, ELSE_IF, ELSE, SWITCH, CASE, DEFAULT, FOR_EACH, BREAK, END, ASK, SHOW_PLAN, VERIFY_EXPECTED) are never defined in skill or project ops — they live in `../canopy-runtime/references/framework-ops.md` (loaded up-front by the tree; ops can reference by bare name `framework-ops.md`)
-- Before creating any op or resource file, consult `framework-ops.md` (already in context) and any existing project-wide ops the consumer has defined — reference shared content, never duplicate it
+- Framework primitives (IF, ELSE_IF, ELSE, SWITCH, CASE, DEFAULT, FOR_EACH, PARALLEL, BREAK, END, ASK, SHOW_PLAN, EXPLORE, VERIFY_EXPECTED) are never defined in skill or project ops — they live in canopy-runtime's primitive slices (indexed by `../canopy-runtime/references/ops.md`; per-slice files under `../canopy-runtime/references/ops/`)
+- Before creating any op or resource file, consult the slice index `../canopy-runtime/references/ops.md` (loaded up-front) and any existing project-wide ops the consumer has defined — reference shared content, never duplicate it
 - After any change to a skill or agent file, verify every `Read \`<category-path>/<file>\`` reference and every op procedure path still resolves to an existing file
 - The platform runtime spec (`../canopy-runtime/references/runtime-claude.md` or `../canopy-runtime/references/runtime-copilot.md`) is loaded up-front by this skill's tree and is in context for every op procedure
 

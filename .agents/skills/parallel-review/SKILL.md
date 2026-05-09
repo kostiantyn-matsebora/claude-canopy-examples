@@ -4,6 +4,7 @@ description: Multi-aspect code review using PARALLEL fan-out — runs four indep
 compatibility: Requires the canopy-runtime skill v0.20.0+ (subagent dispatch model — per-op markers + bold call-sites), published at github.com/kostiantyn-matsebora/claude-canopy. Install with any agentskills.io-compatible tool — e.g. `gh skill install`, `git clone`, the repo's `install.sh`/`install.ps1`, or the Claude Code plugin marketplace. Supports Claude Code and GitHub Copilot.
 metadata:
   argument-hint: "<file-or-directory>"
+  canopy-features: [interaction, control-flow, parallel, subagent, verify]
 ---
 
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
