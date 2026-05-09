@@ -152,6 +152,43 @@ Every operation shows a plan and asks for confirmation before making changes.
 | `review-file` | "Review src/auth.py" | box-drawing |
 | `scaffold-skill` | "Scaffold a new skill called my-skill" | markdown list |
 | `bump-version` | "Bump version to 2.1.0" | markdown list |
+| `parallel-review` | "Run a parallel review on src/" | box-drawing |
+
+## Feature coverage matrix
+
+This repo's job is to demonstrate every capability of the Canopy framework with at least one working skill. Maintain this matrix when canopy ships a feature — see [`.claude/rules/feature-coverage.md`](.claude/rules/feature-coverage.md) for the full rule.
+
+| Feature | bump-version | scaffold-skill | parallel-review | review-file | add-changelog-entry | generate-readme |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `IF` / `ELSE_IF` / `ELSE` | ✓ | ✓ | ✓ |  | ✓ |  |
+| `SWITCH` / `CASE` / `DEFAULT` | ✓ |  |  |  |  |  |
+| `FOR_EACH` |  |  | ✓ (in ops) |  |  |  |
+| `PARALLEL` (v0.19+) |  |  | ✓ |  |  |  |
+| `BREAK` |  |  |  |  |  |  |
+| `END` (halt with message) | ✓ | ✓ | ✓ |  |  |  |
+| `ASK` (multi-choice + free-form) | ✓ | ✓ | ✓ |  |  |  |
+| `SHOW_PLAN` | ✓ | ✓ | ✓ |  |  |  |
+| `VERIFY_EXPECTED` | ✓ | ✓ | ✓ |  |  |  |
+| `## Agent` + `**explore**` (legacy soft-compat) | ✓ |  |  | ✓ | ✓ | ✓ |
+| Subagent dispatch via `**OP_NAME**` + marker (v0.20+) |  |  | ✓ |  |  |  |
+| `## Rules` | ✓ | ✓ | ✓ |  |  |  |
+| `## Response:` | ✓ | ✓ | ✓ |  |  |  |
+| `bind` (variable assignment) |  |  |  |  |  |  |
+| `Read \`category/file\`` resource refs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `assets/schemas/` (output contracts) |  |  | ✓ | ✓ | ✓ | ✓ |
+| `assets/templates/` (token placeholders) | ✓ | ✓ | ✓ |  |  | ✓ |
+| `assets/constants/` (lookup tables) |  | ✓ | ✓ |  |  |  |
+| `assets/policies/` |  |  |  |  |  |  |
+| `assets/checklists/` |  |  |  |  |  |  |
+| `assets/verify/` (expected state) | ✓ | ✓ | ✓ |  |  |  |
+| `scripts/` (executable code) | ✓ |  |  |  |  |  |
+| Box-drawing tree syntax | | | ✓ | ✓ | ✓ | ✓ |
+| Markdown-list tree syntax | ✓ | ✓ | | | | |
+
+**Coverage gaps to close** (no skill currently demos these; track as candidates for future examples):
+- `BREAK` (early-exit a `FOR_EACH` loop)
+- `bind` (named variable assignment)
+- `assets/policies/` and `assets/checklists/` resource categories
 
 ## Adding a new example skill
 
@@ -160,6 +197,7 @@ Every operation shows a plan and asks for confirmation before making changes.
 3. Add `references/ops.md` and supporting resources in `assets/schemas/`, `assets/templates/`, etc. as needed.
 4. Keep examples generic — avoid domain-specific internals.
 5. Document the invocation in `README.md` if user-facing.
+6. **Update the feature coverage matrix above** — add a column for the new skill, mark which features it demonstrates. Cross-check the gaps list and remove any that are now covered.
 
 Or just run `/canopy scaffold <skill-name>` — it creates the standard layout, frontmatter, compatibility field, and safety preamble automatically.
 
