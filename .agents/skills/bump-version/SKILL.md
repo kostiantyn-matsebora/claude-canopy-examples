@@ -4,7 +4,7 @@ description: Bump the project version across all version-bearing files (package.
 compatibility: Requires the canopy-runtime skill (published at github.com/kostiantyn-matsebora/claude-canopy). Install with any agentskills.io-compatible tool — e.g. `gh skill install`, `git clone`, the repo's `install.sh`/`install.ps1`, or the Claude Code plugin marketplace. Supports Claude Code and GitHub Copilot.
 metadata:
   argument-hint: "<new-version>  (e.g. 2.1.0)"
-  canopy-features: [interaction, control-flow, verify, explore]
+  canopy-features: [interaction, control-flow, verify, subagent]
 ---
 
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
@@ -21,20 +21,10 @@ New version: $ARGUMENTS
 
 ---
 
-## Agent
-
-**explore** — scan the project root and detect version-bearing files and changelog state. Output contract: `assets/schemas/explore-schema.json`.
-
-Sub-tasks:
-- Locate version-bearing files — see `assets/constants/version-file-types.md`
-- Detect whether CHANGELOG.md exists at the project root
-
----
-
 ## Tree
 
 * bump-version
-  * EXPLORE >> context
+  * **EXPLORE** >> context
   * IF << $ARGUMENTS is not a valid semver string
     * END Version argument is not valid semver — expected MAJOR.MINOR.PATCH
   * IF << new version is not greater than current version

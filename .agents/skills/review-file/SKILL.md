@@ -4,7 +4,7 @@ description: Perform a structured code review of a file or directory. Reports is
 compatibility: Requires the canopy-runtime skill (published at github.com/kostiantyn-matsebora/claude-canopy). Install with any agentskills.io-compatible tool — e.g. `gh skill install`, `git clone`, the repo's `install.sh`/`install.ps1`, or the Claude Code plugin marketplace. Supports Claude Code and GitHub Copilot.
 metadata:
   argument-hint: "<file-or-directory>"
-  canopy-features: [interaction, control-flow, explore]
+  canopy-features: [interaction, control-flow, subagent]
 ---
 
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
@@ -21,21 +21,11 @@ Review: $ARGUMENTS
 
 ---
 
-## Agent
-
-**explore** — read the review target and detect project coding standards. Output contract: `assets/schemas/explore-schema.json`.
-
-Sub-tasks:
-- Read all files under `$ARGUMENTS`
-- Detect linting and type-check config files at the project root — see `assets/constants/review-config-files.md`
-
----
-
 ## Tree
 
 ```
 review-file
-├── EXPLORE >> context
+├── **EXPLORE** >> context
 ├── SHOW_PLAN >> target | file_count | critical_count | warning_count | info_count
 ├── Read `assets/policies/review-rules.md` for severity classification rules
 ├── IF << critical findings present

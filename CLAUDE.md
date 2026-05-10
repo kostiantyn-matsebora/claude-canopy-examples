@@ -193,8 +193,8 @@ This repo's job is to demonstrate every capability of the Canopy framework with 
 | `ASK` (multi-choice + free-form) | ✓ | ✓ | ✓ |  |  |  |
 | `SHOW_PLAN` | ✓ | ✓ | ✓ |  |  |  |
 | `VERIFY_EXPECTED` | ✓ | ✓ | ✓ |  |  |  |
-| `## Agent` + `**explore**` (legacy soft-compat) | ✓ |  |  | ✓ | ✓ | ✓ |
-| Subagent dispatch via `**OP_NAME**` + marker (v0.20+) |  |  | ✓ |  |  |  |
+| `## Agent` + `**explore**` (legacy soft-compat) |  |  |  |  |  |  |
+| Subagent dispatch via `**OP_NAME**` + marker (v0.20+) | ✓ |  | ✓ | ✓ |  | ✓ |
 | Universal op contracts (`> **Input/Output contract:**`, v0.22+) |  |  | ✓ |  |  |  |
 | `metadata.canopy-contracts: strict` (v0.22+) |  |  | ✓ |  |  |  |
 | `## Rules` | ✓ | ✓ | ✓ |  |  |  |
@@ -212,6 +212,8 @@ This repo's job is to demonstrate every capability of the Canopy framework with 
 | Markdown-list tree syntax | ✓ | ✓ | | | | |
 
 **Manifest column legend:** ✓ — declares `metadata.canopy-features` (lazy-loads only the named primitive slices). · — intentionally omitted to demonstrate v0.21.0's back-compat path: pre-v0.21.0 skills that never declared a manifest still execute correctly; the runtime falls back to loading every slice. `add-changelog-entry` and `generate-readme` carry the · marker on purpose so authors browsing this repo see both shapes side-by-side.
+
+**`## Agent` row is intentionally empty.** Pre-v0.20 skills declared a single explore subagent via the top-level `## Agent` section. Since v0.20 the canonical form is per-op marker dispatch (`> **Subagent.**` op-def marker + bold `**OP_NAME**` call site), and as of v0.9.0 of this repo every subagent-using example uses the marker form. The framework still supports the legacy `## Agent` form as soft-compat so older skills in the wild continue to execute, but new authors should not learn it from this repo's demos. Soft-compat coverage lives in the framework's own `docs/TEST_SCENARIOS.md`, not here.
 
 **Coverage gaps to close** (no skill currently demos these; track as candidates for future examples):
 - `BREAK` (early-exit a `FOR_EACH` loop)

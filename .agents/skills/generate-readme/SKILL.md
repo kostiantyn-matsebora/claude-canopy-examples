@@ -20,23 +20,11 @@ Generate or update README at: $ARGUMENTS (default: README.md)
 
 ---
 
-## Agent
-
-**explore** — reads the project root to populate the README context. Output contract: `assets/schemas/explore-schema.json`.
-
-Sub-tasks:
-- Detect any existing `README.md` at the target path
-- Detect package manifests — see `assets/constants/package-manifests.md`
-- Detect top-level source directories
-- Detect `.gitignore` presence
-
----
-
 ## Tree
 
 ```
 generate-readme
-├── EXPLORE >> context
+├── **EXPLORE** >> context
 ├── SHOW_PLAN >> target_file | sections | detected_language | detected_deps
 ├── ASK << Proceed with generation? | Yes | No
 ├── IF << user chose No

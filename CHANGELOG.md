@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] — 2026-05-11
+
+Decommissions the legacy `## Agent` section across every example skill. The framework still supports `## Agent` as soft-compat (older in-the-wild skills continue to execute), but new authors should not learn it from this repo's demos — the canonical form has been per-op marker dispatch since canopy v0.20.0.
+
+### Changed
+
+- **`bump-version`** — migrated from `## Agent` + `EXPLORE >> context` to marker dispatch. New `## EXPLORE >> context` op definition in `references/ops.md` carrying `> **Subagent.** Output contract: \`assets/schemas/explore-schema.json\``. Tree call site bolded: `**EXPLORE** >> context`. `metadata.canopy-features` updated: `explore` → `subagent`.
+- **`review-file`** — same migration shape. `metadata.canopy-features`: `explore` → `subagent`.
+- **`generate-readme`** — same migration shape. No `metadata.canopy-features` change (skill intentionally omits the manifest to demo the back-compat fallback path).
+- **Coverage matrix** in `CLAUDE.md`:
+  - `## Agent + **explore** (legacy soft-compat)` row is now intentionally all-empty across every skill, with a footnote explaining the decommission.
+  - `Subagent dispatch via **OP_NAME** + marker (v0.20+)` row gains ✓ marks for `bump-version`, `review-file`, `generate-readme` (joining `parallel-review`).
+  - Stale ✓ on `add-changelog-entry` for `## Agent` + `assets/schemas/` was removed (the skill never had a `## Agent` section or a `schemas/` dir — pre-existing matrix bug, fixed).
+
+### Notes
+
+- This is purely a demo-surface change. No skill semantics change; the marker form is exactly equivalent to the legacy form for single-explore skills (the runtime treats `## Agent` + `EXPLORE >> context` as a single-element marked op named `EXPLORE`).
+- `add-changelog-entry` is unchanged — it never used a subagent.
+- Soft-compat coverage for `## Agent` lives in the framework's own `docs/TEST_SCENARIOS.md` (Suite J subagent dispatch), not in this examples repo.
+
 ## [0.8.0] — 2026-05-10
 
 Sync to canopy v0.22.0. Retrofits `parallel-review` as the canonical S3 demo of universal op contracts + opt-in strict-contract mode.

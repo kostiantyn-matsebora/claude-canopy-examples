@@ -2,6 +2,17 @@
 
 ---
 
+## EXPLORE >> context
+
+> **Subagent.** Output contract: `assets/schemas/explore-schema.json`
+
+* EXPLORE >> context
+  * Locate version-bearing files at the project root — see `assets/constants/version-file-types.md`
+  * Detect whether `CHANGELOG.md` exists at the project root
+  * Return a context object matching `assets/schemas/explore-schema.json`
+
+---
+
 ## BUMP_FILES << context | new_version
 
 Update the version string in every file from `context.files_to_update`.
