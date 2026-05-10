@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["security_findings", "perf_findings", "style_findings", "correctness_findings"],
+  "properties": {
+    "security_findings": {
+      "type": "array",
+      "items": { "$ref": "aspect-findings-schema.json#/properties/findings/items" }
+    },
+    "perf_findings": {
+      "type": "array",
+      "items": { "$ref": "aspect-findings-schema.json#/properties/findings/items" }
+    },
+    "style_findings": {
+      "type": "array",
+      "items": { "$ref": "aspect-findings-schema.json#/properties/findings/items" }
+    },
+    "correctness_findings": {
+      "type": "array",
+      "items": { "$ref": "aspect-findings-schema.json#/properties/findings/items" }
+    }
+  }
+}

@@ -7,11 +7,11 @@ metadata:
     author: kostiantyn-matsebora
     canopy-features: []
     github-path: skills/canopy-debug
-    github-pinned: v0.21.0
-    github-ref: refs/tags/v0.21.0
+    github-pinned: v0.22.0
+    github-ref: refs/tags/v0.22.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
-    github-tree-sha: 3e61b6bceefa1df7e2d594d5fc077f9168cbbf28
-    version: 0.21.0
+    github-tree-sha: 8a108a7ce0ec8dfc1e5073517acb201c599f9bba
+    version: 0.22.0
 name: canopy-debug
 ---
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.
