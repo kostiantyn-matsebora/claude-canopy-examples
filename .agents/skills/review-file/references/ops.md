@@ -2,6 +2,17 @@
 
 ---
 
+## EXPLORE >> context
+
+> **Subagent.** Output contract: `assets/schemas/explore-schema.json`
+
+* EXPLORE >> context
+  * Read all files under `$ARGUMENTS`
+  * Detect linting and type-check config files at the project root — see `assets/constants/review-config-files.md`
+  * Apply review criteria; emit findings + detected coding standards as a context object matching `assets/schemas/explore-schema.json`
+
+---
+
 ## REPORT_FINDINGS \<\< severity
 
 ```

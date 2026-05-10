@@ -4,6 +4,19 @@ Skill-specific ops. Highest priority in the three-level lookup order.
 
 ---
 
+## EXPLORE >> context
+
+> **Subagent.** Output contract: `assets/schemas/explore-schema.json`
+
+* EXPLORE >> context
+  * Detect any existing `README.md` at the target path
+  * Detect package manifests — see `assets/constants/package-manifests.md`
+  * Detect top-level source directories
+  * Detect `.gitignore` presence
+  * Return a context object matching `assets/schemas/explore-schema.json`
+
+---
+
 ## MERGE_README \<\< context
 
 ```
