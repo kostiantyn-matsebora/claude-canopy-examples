@@ -21,7 +21,7 @@ git clone https://github.com/kostiantyn-matsebora/claude-canopy-examples
 cd claude-canopy-examples
 ```
 
-Open the repo in Claude Code or VS Code with GitHub Copilot — and you're done. The Canopy framework (`canopy-runtime`, `canopy`, `canopy-debug`) is vendored under `.agents/skills/`, the cross-client skills root recognized by canopy-runtime v0.18.1+. Both clients pick it up via the marker block committed to `CLAUDE.md` and `.github/copilot-instructions.md`.
+Open the repo in Claude Code or VS Code with GitHub Copilot — and you're done. The Canopy framework (`canopy-runtime`, `canopy`, `canopy-debug`) is vendored under `.agents/skills/`, the cross-client skills root that both Claude Code and GitHub Copilot read. Both clients pick it up via the marker block committed to `CLAUDE.md` and `.github/copilot-instructions.md`.
 
 The framework skills become available as:
 
@@ -55,7 +55,7 @@ Open the repository in Claude Code or VS Code/Copilot and invoke any of the exam
 | [`scaffold-skill`](.agents/skills/scaffold-skill/SKILL.md) | `Scaffold a new skill called my-skill` | markdown list (`*`) |
 | [`bump-version`](.agents/skills/bump-version/SKILL.md) | `Bump version to 2.1.0` | markdown list (`*`) |
 
-Each skill lives under `.agents/skills/<skill-name>/` and follows the agentskills.io standard layout (canopy v0.18.0+):
+Each skill lives under `.agents/skills/<skill-name>/` and follows the agentskills.io standard layout:
 
 - `SKILL.md` — the skill definition (frontmatter incl. `compatibility` + safety preamble + Tree + Rules + Response)
 - `references/ops.md` or `references/ops/<name>.md` — skill-local op definitions

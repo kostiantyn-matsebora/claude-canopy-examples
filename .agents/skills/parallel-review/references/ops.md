@@ -2,9 +2,9 @@
 
 ---
 
-## EXPLORE_TARGET \<\< target_path \>\> context
+## EXPLORE_TARGET << target_path >> context
 
-> **Subagent.** Output contract: `assets/schemas/explore-schema.json`.
+> **Subagent.** Output contract: `assets/schemas/explore-schema.json`. Input contract: `assets/schemas/explore-target-input.json`.
 >
 > Inputs:
 > - `target_path` — file or directory passed as `$ARGUMENTS`
@@ -18,9 +18,9 @@ EXPLORE_TARGET << target_path
 
 ---
 
-## REVIEW_ASPECT \<\< aspect | files \>\> findings
+## REVIEW_ASPECT << aspect | files >> findings
 
-> **Subagent.** Output contract: `assets/schemas/aspect-findings-schema.json`.
+> **Subagent.** Output contract: `assets/schemas/aspect-findings-schema.json`. Input contract: `assets/schemas/review-aspect-input.json`.
 >
 > Inputs:
 > - `aspect` — one of `"security"`, `"performance"`, `"style"`, `"correctness"`
@@ -41,7 +41,10 @@ REVIEW_ASPECT << aspect | files
 
 ---
 
-## MERGE_ASPECT_FINDINGS \<\< security_findings | perf_findings | style_findings | correctness_findings \>\> all_findings
+## MERGE_ASPECT_FINDINGS << security_findings | perf_findings | style_findings | correctness_findings >> all_findings
+
+> **Input contract:** `assets/schemas/merge-aspect-findings-input.json`
+> **Output contract:** `assets/schemas/merge-aspect-findings-output.json`
 
 ```
 MERGE_ASPECT_FINDINGS << security_findings | perf_findings | style_findings | correctness_findings
@@ -56,7 +59,9 @@ MERGE_ASPECT_FINDINGS << security_findings | perf_findings | style_findings | co
 
 ---
 
-## REPORT_BY_SEVERITY \<\< all_findings
+## REPORT_BY_SEVERITY << all_findings
+
+> **Input contract:** `assets/schemas/report-by-severity-input.json`
 
 ```
 REPORT_BY_SEVERITY << all_findings

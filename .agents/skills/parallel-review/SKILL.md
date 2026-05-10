@@ -5,6 +5,7 @@ compatibility: Requires the canopy-runtime skill v0.20.0+ (subagent dispatch mod
 metadata:
   argument-hint: "<file-or-directory>"
   canopy-features: [interaction, control-flow, parallel, subagent, verify]
+  canopy-contracts: strict
 ---
 
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.

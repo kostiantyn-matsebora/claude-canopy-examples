@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] — 2026-05-10
+
+Sync to canopy v0.22.0. Retrofits `parallel-review` as the canonical S3 demo of universal op contracts + opt-in strict-contract mode.
+
+### Added
+
+- **`parallel-review` retrofitted with universal op contracts** (S3, v0.22.0+):
+  - Subagent ops `EXPLORE_TARGET` and `REVIEW_ASPECT` gain `Input contract:` references alongside their existing `Output contract:` markers.
+  - Inline ops `MERGE_ASPECT_FINDINGS` and `REPORT_BY_SEVERITY` declare bare `> **Input contract:** \`...\`` / `> **Output contract:** \`...\`` blockquote markers — the new S3 universal-contract syntax.
+  - `metadata.canopy-contracts: strict` added to the SKILL.md frontmatter — opts the skill into runtime contract validation. Each contract-bearing op's input is validated before firing; output validated before binding.
+  - New schema files under `assets/schemas/`:
+    - `explore-target-input.json` — input contract for `EXPLORE_TARGET`
+    - `review-aspect-input.json` — input contract for `REVIEW_ASPECT`
+    - `merge-aspect-findings-input.json` — input contract for the merge op (uses `$ref` into `aspect-findings-schema.json`)
+    - `merge-aspect-findings-output.json` — output contract; the merged `all_findings` array shape
+    - `report-by-severity-input.json` — input contract; uses `$ref` into the merge output schema
+- **Coverage matrix updated** (`CLAUDE.md`): two new rows for "Universal op contracts" and `metadata.canopy-contracts: strict`, both ✓ on `parallel-review`.
+
+### Notes
+
+- Other example skills intentionally remain contract-less to demonstrate the back-compat path — pre-v0.22.0 skills continue to execute unchanged with no schema declarations.
+- The `$ref` composition in the new schema files is single-skill only (canopy v0.22.0 limitation; cross-skill `$ref` is out of scope).
+
 ## [0.7.0] — 2026-05-09
 
 Bundles two framework syncs: **v0.20.0** (subagent dispatch model — per-op markers + bold call-sites; `parallel-review` retrofitted as the canonical example) and **v0.21.0** (sliced primitive spec + per-skill `metadata.canopy-features` manifest; mixed retrofit demonstrating both annotation paths).

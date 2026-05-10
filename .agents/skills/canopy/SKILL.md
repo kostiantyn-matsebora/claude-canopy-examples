@@ -10,11 +10,11 @@ metadata:
         - control-flow
         - explore
     github-path: skills/canopy
-    github-pinned: v0.21.0
-    github-ref: refs/tags/v0.21.0
+    github-pinned: v0.22.0
+    github-ref: refs/tags/v0.22.0
     github-repo: https://github.com/kostiantyn-matsebora/claude-canopy
-    github-tree-sha: 6924fa6d7c9cdc06a661822dbe0631c0dcf79727
-    version: 0.21.0
+    github-tree-sha: 65089fdd20e0c8b7528846e9b3d8b8322f316bbf
+    version: 0.22.0
 name: canopy
 ---
 > **Runtime required.** This skill uses Canopy tree notation; canopy-runtime must be active.

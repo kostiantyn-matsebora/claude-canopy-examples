@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["aspect", "files"],
+  "properties": {
+    "aspect": { "enum": ["security", "performance", "style", "correctness"] },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "language"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" }
+        }
+      }
+    }
+  }
+}
